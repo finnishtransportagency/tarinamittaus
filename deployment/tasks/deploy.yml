@@ -1,0 +1,38 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Log deployment executor
+      shell: echo "`date -u` {{ ansible_ssh_user }} {{versionhash}}" >> /var/lib/tomcat/deploymenthistory.txt
+
+    - name: Create tarinamittaus application directory
+      file: path=/var/lib/tomcat/webapps/tarinamittaus state=directory mode=0755 owner=tomcat group=tomcat
+
+    - name: Unarchive local war to remote tomcat folder
+      unarchive: src=../../target/TarinamittausUI.war dest=/var/lib/tomcat/webapps/tarinamittaus mode=0755 owner=tomcat group=tomcat
+
+#    - name: Copy hibernate config
+#      template: src=../../src/main/resources/hibernate.cfg.xml dest=/var/lib/tomcat/webapps/tarinamittaus/WEB-INF/classes/hibernate.cfg.xml mode=0755 owner=tomcat group=tomcat
+
+    - name: Copy application properties
+      template: src=../../src/main/resources/application.template.properties dest=/var/lib/tomcat/webapps/tarinamittaus/WEB-INF/classes/application.properties mode=0755 owner=tomcat group=tomcat
+#    - name: Copy required jars to right places in server
+#      shell: "{{ item }}"
+#      with_items:
+#        - cp /usr/share/tomcat/lib/extras/tomcat-juli.jar /usr/share/tomcat/bin/tomcat-juli.jar
+#        - cp /usr/share/tomcat/lib/extras/tomcat-juli.jar /usr/share/tomcat/lib/tomcat-juli.jar
+#        - cp /usr/share/tomcat/lib/extras/tomcat-juli-adapters.jar /usr/share/tomcat/lib/tomcat-juli-adapters.jar
+#
+#    - name: Delete tomcat global logging if excists
+#      file:
+#        state: absent
+#        path: /usr/share/tomcat/conf/logging.properties
+#
+#    - name: Copy tomcat log4j config
+#      template: src=../templates/log4j_tomcat.properties dest=/usr/share/tomcat/lib/log4j.properties mode=0755 owner=tomcat group=tomcat
+
+    - name: Copy log4j config
+      template: src=../../src/main/resources/log4j.properties dest=/var/lib/tomcat/webapps/tarinamittaus/WEB-INF/classes/log4j.properties mode=0755 owner=tomcat group=tomcat
+
+    - name: Restart tomcat
+      service: name=tomcat state=restarted enabled=yes
