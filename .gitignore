@@ -1,0 +1,9 @@
+.idea
+**/target/
+/target/
+*/target/*
+target/*
+.classpath
+.project
+.settings
+src/main/app/dist/
