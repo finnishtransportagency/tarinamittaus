@@ -216,6 +216,21 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.20</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-core -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-core</artifactId>
+            <version>1.12.257</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-secretsmanager -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-secretsmanager</artifactId>
+            <version>1.12.257</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -304,6 +319,13 @@
             <properties>
                 <spring.profiles.active>docker</spring.profiles.active>
             </properties>
+        </profile>
+        <profile>
+            <id>awsdev</id>
+            <properties>
+                <spring.profiles.active>awsdev</spring.profiles.active>
+            </properties>
+
         </profile>
     </profiles>
 
