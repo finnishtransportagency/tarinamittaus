@@ -1,0 +1,23 @@
+services:
+  db:
+    image: tarina-pgsql
+    command: ["postgres", "-c", "log_statement=all", "-c", "log_destination=stderr"]
+    build:
+      context: .
+      dockerfile: ./Dockerfile_postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: tarinam
+      POSTGRES_PASSWORD: tarinam123
+
+  tarina:
+    env_file:
+      - ./config/.local_docker_env
+    image: tarina-app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8081:8080"
+

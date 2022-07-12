@@ -284,19 +284,29 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <includes>
-                    <!-- <include>ojdbc6.jar</include>-->
-                    <include>hibernate.cfg.xml</include>
-                    <include>application.properties</include>
-                    <!--  <include>testhibernate.cfg.xml</include> -->
-                </includes>
-                <excludes>
-                    <!--  <exclude>hibernate.cfg.xml</exclude> -->
-                </excludes>
+                <filtering>true</filtering>
             </resource>
         </resources>
-
     </build>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profiles.active>local</spring.profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>docker</id>
+            <properties>
+                <spring.profiles.active>docker</spring.profiles.active>
+            </properties>
+        </profile>
+    </profiles>
+
     <repositories>
         <repository>
             <id>lib</id>
