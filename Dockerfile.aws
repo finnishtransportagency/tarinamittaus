@@ -12,7 +12,6 @@ FROM 894932018761.dkr.ecr.eu-west-1.amazonaws.com/maven:3.6.0-jdk-11-slim AS BUI
 COPY ./src/main/java /data/src/main/java
 COPY ./src/main/resources /data/src/main/resources
 COPY pom.xml /data/
-COPY ./lib/ojdbc6.jar /data/lib/ojdbc6.jar
 COPY --from=BUILD_FRONTEND /usr/src/app/dist/ /data/src/main/webapp/
 
 RUN cd /data && mvn clean install -Dmaven.test.skip=true
