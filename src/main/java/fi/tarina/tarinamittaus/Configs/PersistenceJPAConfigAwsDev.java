@@ -1,5 +1,7 @@
 package fi.tarina.tarinamittaus.Configs;
 
+import com.amazonaws.auth.ContainerCredentialsProvider;
+import com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.secretsmanager.AWSSecretsManager;
 import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
@@ -82,7 +84,9 @@ public class PersistenceJPAConfigAwsDev {
         AwsClientBuilder.EndpointConfiguration config = new AwsClientBuilder.EndpointConfiguration(endpoint, region);
         AWSSecretsManagerClientBuilder clientBuilder = AWSSecretsManagerClientBuilder.standard();
         clientBuilder.setEndpointConfiguration(config);
-        AWSSecretsManager client = clientBuilder.build();
+        AWSSecretsManager client = clientBuilder
+                .withCredentials(new EC2ContainerCredentialsProviderWrapper())
+                .build();
 
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -93,6 +97,7 @@ public class PersistenceJPAConfigAwsDev {
                 .withSecretId(secretName);
         GetSecretValueResult getSecretValueResponse = null;
         try {
+            //täsä tulee eroro
             getSecretValueResponse = client.getSecretValue(getSecretValueRequest);
 
         } catch (ResourceNotFoundException e) {
