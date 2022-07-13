@@ -11,15 +11,12 @@ phases:
   pre_build:
     commands:
       - echo Logging to ECR...
-      - echo ${spring_profiles_active}
-      - printenv
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_BASEIMAGE_REPOSITORY_URI
       - set
   build:
     commands:
       - echo Build started on `date`
       - echo ${spring_profiles_active}
-      - printenv
       # - sed -i 's/!dbhost!/'${LOCAL_JDBC_HOST}'/' ./src/main/resources/hibernate.cfg.aws.xml
       # - sed -i 's/!dbport!/'${LOCAL_JDBC_PORT}'/' ./src/main/resources/hibernate.cfg.aws.xml
       # - sed -i 's/!dbname!/'${LOCAL_JDBC_DBNAME}'/' ./src/main/resources/hibernate.cfg.aws.xml

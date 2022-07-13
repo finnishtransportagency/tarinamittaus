@@ -17,6 +17,7 @@ COPY --from=BUILD_FRONTEND /usr/src/app/dist/ /data/src/main/webapp/
 RUN cd /data && mvn clean install -Dmaven.test.skip=true
 
 FROM 894932018761.dkr.ecr.eu-west-1.amazonaws.com/tomcat:7-jdk8-openjdk
+RUN printenv
 
 RUN mkdir ${CATALINA_HOME}/webapps/tarinamittaus
 
