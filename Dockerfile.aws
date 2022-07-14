@@ -20,8 +20,16 @@ RUN cd /data && mvn clean install -Dmaven.test.skip=true
 FROM 894932018761.dkr.ecr.eu-west-1.amazonaws.com/tomcat:7-jdk8-openjdk
 
 ARG ENVIRONMENT_VALUE
+ARG AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
+
+#https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/EC2ContainerCredentialsProviderWrapper.html
+#ARG CREDENTIALS_ENDPOINT="http://169.254.170.2"
+
 ENV spring_profiles_active=${ENVIRONMENT_VALUE}
+ENV AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=${AWS_CONTAINER_CREDENTIALS_RELATIVE_URI}
+#ENV AWS_CONTAINER_CREDENTIALS_FULL_URI="${CREDENTIALS_ENDPOINT}${AWS_CONTAINER_CREDENTIALS_RELATIVE_URI}"
 RUN echo ${ENVIRONMENT_VALUE}
+RUN echo ${AWS_CONTAINER_CREDENTIALS_RELATIVE_URI}
 
 RUN printenv
 
