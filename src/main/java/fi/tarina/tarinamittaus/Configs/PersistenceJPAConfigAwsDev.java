@@ -86,7 +86,7 @@ public class PersistenceJPAConfigAwsDev {
         AWSSecretsManagerClientBuilder clientBuilder = AWSSecretsManagerClientBuilder.standard();
         clientBuilder.setEndpointConfiguration(config);
         AWSSecretsManager client = clientBuilder
-                .withCredentials(new DefaultAWSCredentialsProviderChain())
+                .withCredentials(new EC2ContainerCredentialsProviderWrapper())
                 .build();
 
 
