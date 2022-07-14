@@ -1,6 +1,7 @@
 package fi.tarina.tarinamittaus.Configs;
 
 import com.amazonaws.auth.ContainerCredentialsProvider;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.secretsmanager.AWSSecretsManager;
@@ -85,7 +86,7 @@ public class PersistenceJPAConfigAwsDev {
         AWSSecretsManagerClientBuilder clientBuilder = AWSSecretsManagerClientBuilder.standard();
         clientBuilder.setEndpointConfiguration(config);
         AWSSecretsManager client = clientBuilder
-                .withCredentials(new EC2ContainerCredentialsProviderWrapper())
+                .withCredentials(new DefaultAWSCredentialsProviderChain())
                 .build();
 
 
