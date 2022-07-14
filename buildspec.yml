@@ -6,7 +6,7 @@ env:
     LOCAL_JDBC_DBNAME: "dev/hassu/db:dbname"
     LOCAL_JDBC_USERNAME: "dev/hassu/db:username"
     LOCAL_JDBC_PASSWORD: "dev/hassu/db:password"
-    LOCAL_JDBC_SCHEMA: "dev/hassu/db:schema"
+    LOCAL_JDBC_SCHEMA: "dev/hassu/db:schema_tarina"
 phases:
   pre_build:
     commands:
@@ -17,15 +17,13 @@ phases:
     commands:
       - echo Build started on `date`
       - echo ${spring_profiles_active}
-      # - sed -i 's/!dbhost!/'${LOCAL_JDBC_HOST}'/' ./src/main/resources/hibernate.cfg.aws.xml
-      # - sed -i 's/!dbport!/'${LOCAL_JDBC_PORT}'/' ./src/main/resources/hibernate.cfg.aws.xml
-      # - sed -i 's/!dbname!/'${LOCAL_JDBC_DBNAME}'/' ./src/main/resources/hibernate.cfg.aws.xml
-      # - sed -i 's/!dbschema!/'${LOCAL_JDBC_SCHEMA}'/' ./src/main/resources/hibernate.cfg.aws.xml
-      # - sed -i 's/!dbusername!/'${LOCAL_JDBC_USERNAME}'/' ./src/main/resources/hibernate.cfg.aws.xml
-      # - sed -i 's/!dbpassword!/'${LOCAL_JDBC_PASSWORD}'/' ./src/main/resources/hibernate.cfg.aws.xml
+       - sed -i 's/!dbhost!/'${LOCAL_JDBC_HOST}'/' ./src/main/resources/application-awsdev.properties
+       - sed -i 's/!dbport!/'${LOCAL_JDBC_PORT}'/' ./src/main/resources/application-awsdev.properties
+       - sed -i 's/!dbname!/'${LOCAL_JDBC_DBNAME}'/' ./src/main/resources/application-awsdev.properties
+       - sed -i 's/!dbschema!/'${LOCAL_JDBC_SCHEMA}'/' ./src/main/resources/application-awsdev.properties
+       - sed -i 's/!dbusername!/'${LOCAL_JDBC_USERNAME}'/' ./src/main/resources/application-awsdev.properties
+       - sed -i 's/!dbpassword!/'${LOCAL_JDBC_PASSWORD}'/' ./src/main/resources/application-awsdev.properties
       # use '|' in sed expression since the '/'-characters in the url break the command
-#      - rm ./src/main/resources/hibernate.cfg.xml
-#      - mv ./src/main/resources/hibernate.cfg.aws.xml ./src/main/resources/hibernate.cfg.xml
       - docker build -f Dockerfile.aws
         --build-arg ENVIRONMENT_VALUE=${spring_profiles_active}
         --build-arg AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=${AWS_CONTAINER_CREDENTIALS_RELATIVE_URI} 
