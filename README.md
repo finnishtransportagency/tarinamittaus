@@ -1,13 +1,17 @@
 # Instructions
 
-1. Start local docker instance for oracle db `sh start_oracle_docker.sh`
+Start application and db instances locally with docker-compose `docker-compose up --build`
 
-2. Once running, create schema's and tables by running script from `db/create_schema.sql` eg. using dbeaver
+Alternatively, `docker-compose up --build tarina` or `docker-compose up --build db` starts corresponding service from compose file.
 
-- Clean install `-Dmaven.test.skip=true`
-- Run locally mvn spring-boot:run`
+Without docker `mvn clean install -Dmaven.test.skip=true` and `mvn spring-boot:run`
 
+### Profiles
+Application uses 3 profiles: local, docker and awsdev defined in pom.xml, with corresponding properties files in resources-folder.
 
+- local: active default
+- docker: environment file in ./config/.local_docker_env, which is passed into docker container
+- awsdev: value is passed from EnvironmentVariables in CodeBuild
 
 ## Swagger
 `http://localhost:8080/swagger-ui.html`
