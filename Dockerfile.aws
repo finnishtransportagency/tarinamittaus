@@ -15,7 +15,7 @@ COPY ./src/main/resources /data/src/main/resources
 COPY pom.xml /data/
 COPY --from=BUILD_FRONTEND /usr/src/app/dist/ /data/src/main/webapp/
 
-RUN cd /data && mvn clean install -Dmaven.test.skip=true
+RUN cd /data && mvn clean install -Dmaven.test.skip=true -Dlog4j2.debug=true
 
 FROM 894932018761.dkr.ecr.eu-west-1.amazonaws.com/tomcat:7-jdk8-openjdk
 
