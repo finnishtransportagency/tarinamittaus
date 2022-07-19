@@ -4,6 +4,8 @@ import fi.tarina.tarinamittaus.Model.Mittaus;
 import fi.tarina.tarinamittaus.Model.MittausDto;
 import fi.tarina.tarinamittaus.Service.MittausService;
 import fi.tarina.tarinamittaus.Specification.MittausSearchParameters;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import java.util.List;
 public class MittausController {
 
     private MittausService mittausService;
+    private static Logger logger = LogManager.getLogger(MittausController.class);
 
     @Autowired
     public MittausController(MittausService mittausService) {
@@ -27,6 +30,7 @@ public class MittausController {
     public List<Mittaus> find(
             MittausSearchParameters parameters
                              ) {
+        logger.debug("get ALL MITTAUS!!!");
         try {
             return mittausService.searchMittausListByKeyword(parameters);
         } catch (Exception e) {
@@ -36,6 +40,7 @@ public class MittausController {
 
     @GetMapping(path = "{id}")
     public ResponseEntity<Mittaus> getById(@PathVariable("id") Integer id) {
+        logger.debug("get ALL MITTAUS!!! " + id);
         try {
             Mittaus mittaus = mittausService.getMittaus(id);
             return new ResponseEntity<>(mittaus, HttpStatus.OK);

@@ -8,8 +8,8 @@ import fi.tarina.tarinamittaus.Repository.AsennuspaikanTyyppiRepository;
 import fi.tarina.tarinamittaus.Specification.MittausSearchParameters;
 import fi.tarina.tarinamittaus.Specification.MittausSpecifications;
 import fi.tarina.tarinamittaus.Util.MittausMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ import java.util.Optional;
 @Service
 public class MittausService {
 
-    private final Logger LOG = LoggerFactory.getLogger(MittausService.class);
+    private static Logger logger = LogManager.getLogger(MittausService.class);
 
     private final MittausRepository mittausRepository;
     private final AsennuspaikanTyyppiRepository asennuspaikanTyyppiRepository;
@@ -80,7 +80,7 @@ public class MittausService {
             AsennuspaikanTyyppi savedAsennuspaikanTyyppi =
                     this.asennuspaikanTyyppiRepository.save(asennuspaikanTyyppi);
 
-            LOG.info("savedAsennuspaikanTyyppi " + savedAsennuspaikanTyyppi);
+            logger.debug("savedAsennuspaikanTyyppi " + savedAsennuspaikanTyyppi);
 
             asennettuAnturi.setAsennuspaikanTyyppi(savedAsennuspaikanTyyppi);
             asennettuAnturi.setMittaus(mittaus);
@@ -99,7 +99,7 @@ public class MittausService {
                 this.tunnusarvotRepository.save(anturikohtaisetTunnusarvot);
             }
 
-            LOG.info("asennettuAnturi " + asennettuAnturi);
+            logger.debug("asennettuAnturi " + asennettuAnturi);
         }
 
         return savedMittaus;
@@ -114,7 +114,7 @@ public class MittausService {
 
     @Transactional
     public List<Mittaus> searchMittausListByKeyword(MittausSearchParameters params) throws Exception {
-        System.out.println("params?? " + params.toString());
+        logger.debug("params?? " + params.toString());
         try {
             Specification<Mittaus> specification1 = MittausSpecifications.mittausKeywordLike(params.getSearchKeyword());
             Specification<Mittaus> specification2 = MittausSpecifications.mittausSquareArea(params);

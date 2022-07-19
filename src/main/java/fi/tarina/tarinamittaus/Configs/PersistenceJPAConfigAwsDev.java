@@ -9,6 +9,8 @@ import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
 import com.amazonaws.services.secretsmanager.model.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +33,8 @@ import java.util.Properties;
 
 
 public class PersistenceJPAConfigAwsDev {
+
+    private static Logger logger = LogManager.getLogger(PersistenceJPAConfigAwsDev.class);
 
     @Autowired
     private Environment env;
@@ -100,11 +104,11 @@ public class PersistenceJPAConfigAwsDev {
             getSecretValueResponse = client.getSecretValue(getSecretValueRequest);
 
         } catch (ResourceNotFoundException e) {
-            System.out.println("log.error(The requested secret " + secretName + " was not found);");
+            logger.error("The requested secret " + secretName + " was not found);");
         } catch (InvalidRequestException e) {
-//            log.error("The request was invalid due to: " + e.getMessage());
+            logger.error("The request was invalid due to: " + e.getMessage());
         } catch (InvalidParameterException e) {
-//            log.error("The request had invalid params: " + e.getMessage());
+            logger.error("The request had invalid params: " + e.getMessage());
         }
 
         if (getSecretValueResponse == null) {
@@ -115,17 +119,17 @@ public class PersistenceJPAConfigAwsDev {
         // Depending on whether the secret was a string or binary, one of these fields will be populated
         String secret = getSecretValueResponse.getSecretString();
         if (secret == null) {
-//            log.error("The Secret String returned is null");
+            logger.error("The Secret String returned is null");
             return null;
         }
         try {
             secretsJson = objectMapper.readTree(secret);
         } catch (IOException e) {
-            System.out.println("log.error(Exception while retreiving secret values: " + e.getMessage());
+            logger.error("Exception while retreiving secret values: " + e.getMessage());
         }
 
 
-        System.out.println("Secrets json - " + secretsJson);
+        logger.error("Secrets json - " + secretsJson);
         String host = secretsJson.get("host").textValue();
         String port = secretsJson.get("port").textValue();
         String dbname = secretsJson.get("dbname").textValue();
