@@ -6,9 +6,11 @@ import fi.tarina.tarinamittaus.auth.UserInfo;
 import org.apache.logging.log4j.ThreadContext;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+@WebFilter(urlPatterns = "/*")
 public class RequestLogFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
