@@ -4,6 +4,7 @@ import fi.tarina.tarinamittaus.Model.Mittaus;
 import fi.tarina.tarinamittaus.Model.MittausDto;
 import fi.tarina.tarinamittaus.Service.MittausService;
 import fi.tarina.tarinamittaus.Specification.MittausSearchParameters;
+import fi.tarina.tarinamittaus.auth.Constants;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class MittausController {
 
     @PostMapping
     public ResponseEntity<Mittaus> saveMittaus(
-            @RequestHeader(value = "OAM_REMOTE_USER", defaultValue = "local user") String remoteUser,
+            @RequestHeader(value = Constants.JWT_USER_NAME_ATTRIBUTE, defaultValue = "local user") String remoteUser,
             @Valid @RequestBody Mittaus mittausRequest) {
         try {
             mittausRequest.setCreated_by_lx(remoteUser);
@@ -75,7 +76,7 @@ public class MittausController {
 
     @PutMapping
     public void updateMittaus(
-            @RequestHeader(value = "OAM_REMOTE_USER", defaultValue = "local user") String remoteUser,
+            @RequestHeader(value = Constants.JWT_USER_NAME_ATTRIBUTE, defaultValue = "local user") String remoteUser,
             @RequestBody MittausDto dto) {
         try {
             dto.setCreated_by_lx(remoteUser);
