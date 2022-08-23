@@ -56,6 +56,7 @@ public class MittausController {
             @RequestHeader(value = Constants.JWT_USER_NAME_ATTRIBUTE, defaultValue = "local user") String remoteUser,
             @Valid @RequestBody Mittaus mittausRequest) {
         try {
+            logger.debug("saveMittaus remoteUser: " + remoteUser);
             mittausRequest.setCreated_by_lx(remoteUser);
             Mittaus savedMittaus = mittausService.saveMittaus(mittausRequest);
             return new ResponseEntity<>(savedMittaus, HttpStatus.CREATED);
@@ -79,6 +80,7 @@ public class MittausController {
             @RequestHeader(value = Constants.JWT_USER_NAME_ATTRIBUTE, defaultValue = "local user") String remoteUser,
             @RequestBody MittausDto dto) {
         try {
+            logger.debug("updateMittaus remoteUser: " + remoteUser);
             dto.setCreated_by_lx(remoteUser);
             mittausService.updateMittaus(dto);
         } catch (Exception e) {
