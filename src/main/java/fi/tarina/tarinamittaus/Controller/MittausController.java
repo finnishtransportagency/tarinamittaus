@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -53,10 +54,12 @@ public class MittausController {
 
     @PostMapping
     public ResponseEntity<Mittaus> saveMittaus(
-            @RequestHeader(value = Constants.JWT_USER_NAME_ATTRIBUTE, defaultValue = "local user") String remoteUser,
-            @Valid @RequestBody Mittaus mittausRequest) {
+            @Valid @RequestBody Mittaus mittausRequest,
+            HttpServletRequest request) {
         try {
-            logger.debug("saveMittaus remoteUser: " + remoteUser);
+            String remoteUser = request.getAttribute(Constants.JWT_USER_NAME_ATTRIBUTE) == null ? "local user" :
+                    request.getAttribute(Constants.JWT_USER_NAME_ATTRIBUTE).toString();
+            logger.debug("saveMittaus remoteUser: {}", remoteUser);
             mittausRequest.setCreated_by_lx(remoteUser);
             Mittaus savedMittaus = mittausService.saveMittaus(mittausRequest);
             return new ResponseEntity<>(savedMittaus, HttpStatus.CREATED);
@@ -77,9 +80,11 @@ public class MittausController {
 
     @PutMapping
     public void updateMittaus(
-            @RequestHeader(value = Constants.JWT_USER_NAME_ATTRIBUTE, defaultValue = "local user") String remoteUser,
-            @RequestBody MittausDto dto) {
+            @RequestBody MittausDto dto,
+            HttpServletRequest request) {
         try {
+            String remoteUser = request.getAttribute(Constants.JWT_USER_NAME_ATTRIBUTE) == null ? "local user" :
+                    request.getAttribute(Constants.JWT_USER_NAME_ATTRIBUTE).toString();
             logger.debug("updateMittaus remoteUser: " + remoteUser);
             dto.setCreated_by_lx(remoteUser);
             mittausService.updateMittaus(dto);
