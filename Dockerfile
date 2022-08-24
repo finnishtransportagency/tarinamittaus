@@ -21,4 +21,4 @@ FROM tomcat:7-jdk8-openjdk
 RUN mkdir ${CATALINA_HOME}/webapps/tarinamittaus
 
 COPY --from=BUILD_BACKEND /data/target/TarinamittausUI.war ${CATALINA_HOME}/webapps/tarinamittaus/TarinamittausUI.war
-RUN unzip ${CATALINA_HOME}/webapps/tarinamittaus/TarinamittausUI.war -d ${CATALINA_HOME}/webapps/tarinamittaus/
+RUN unzip ${CATALINA_HOME}/webapps/tarinamittaus/TarinamittausUI.war -d ${CATALINA_HOME}/webapps/ROOT

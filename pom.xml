@@ -334,7 +334,7 @@
                 <version>2.2</version>
                 <configuration>
                     <server>TomcatServer</server>
-                    <path>/tarinamittaus</path>
+                    <path>/</path>
                 </configuration>
             </plugin>
         </plugins>

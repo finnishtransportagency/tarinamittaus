@@ -56,7 +56,7 @@ export function fullURL(...urls: string[]) {
 export function fullRestURL(...urls: string[]) {
     // This works
     const BaseRestURL =
-        process.env.REACT_APP_BASE_REST_URL || "tarinamittaus/rest/mittaus/";
+        process.env.REACT_APP_BASE_REST_URL || "rest/mittaus/";
 
     //--- degugging ---
     const urlstring = urljoin(`/${BaseRestURL}`, ...urls);
