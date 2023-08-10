@@ -32,7 +32,7 @@ public class MittausController {
     public List<Mittaus> find(
             MittausSearchParameters parameters
                              ) {
-        logger.debug("get ALL MITTAUS!!!");
+        logger.info("Get all mittaus");
         try {
             return mittausService.searchMittausListByKeyword(parameters);
         } catch (Exception e) {
@@ -42,7 +42,7 @@ public class MittausController {
 
     @GetMapping(path = "{id}")
     public ResponseEntity<Mittaus> getById(@PathVariable("id") Integer id) {
-        logger.debug("get ALL MITTAUS!!! " + id);
+        logger.info("Get mittaus with id {}", id);
         try {
             Mittaus mittaus = mittausService.getMittaus(id);
             return new ResponseEntity<>(mittaus, HttpStatus.OK);
@@ -59,11 +59,13 @@ public class MittausController {
         try {
             String remoteUser = request.getAttribute(Constants.JWT_USER_NAME_ATTRIBUTE) == null ? "local user" :
                     request.getAttribute(Constants.JWT_USER_NAME_ATTRIBUTE).toString();
-            logger.debug("saveMittaus remoteUser: {}", remoteUser);
+            logger.info("Saving new mittaus");
             mittausRequest.setCreated_by_lx(remoteUser);
             Mittaus savedMittaus = mittausService.saveMittaus(mittausRequest);
+            logger.info("Mittaus successfully saved with id {}", savedMittaus.getKohde_id());
             return new ResponseEntity<>(savedMittaus, HttpStatus.CREATED);
         } catch (Exception e) {
+            logger.warn("Failed to save new mittaus");
             throw new CustomBadRequestException(e.getMessage());
         }
     }
@@ -71,9 +73,12 @@ public class MittausController {
     @DeleteMapping(path = "{id}")
     public ResponseEntity<Mittaus> deleteMittaus(@PathVariable("id") Integer id) {
         try {
+            logger.info("Removing mittaus with id {}", id);
             this.mittausService.deleteMittaus(id);
+            logger.info("Successfully removed mittaus with id {}", id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
+            logger.warn("Failed to remove mittaus with id {}", id);
             throw new CustomNotFoundException();
         }
     }
@@ -85,10 +90,12 @@ public class MittausController {
         try {
             String remoteUser = request.getAttribute(Constants.JWT_USER_NAME_ATTRIBUTE) == null ? "local user" :
                     request.getAttribute(Constants.JWT_USER_NAME_ATTRIBUTE).toString();
-            logger.debug("updateMittaus remoteUser: " + remoteUser);
+            logger.info("Updating mittaus with id {}", dto.getKohde_id());
             dto.setCreated_by_lx(remoteUser);
             mittausService.updateMittaus(dto);
+            logger.info("Successfully updated mittaus with id {}", dto.getKohde_id());
         } catch (Exception e) {
+            logger.warn("Failed to update mittaus with id {}", dto.getKohde_id());
             throw new CustomNotFoundException();
         }
     }
