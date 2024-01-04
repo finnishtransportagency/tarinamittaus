@@ -19,7 +19,7 @@ export const postData = async (data = {}) => {
 }
 
 export const putData = async (data = {}) => {
-  const response = await fetch(baseUrl, {
+  return fetch(baseUrl, {
     method: 'PUT',
     mode: 'cors',
     cache: 'no-cache',
@@ -31,7 +31,6 @@ export const putData = async (data = {}) => {
     referrerPolicy: 'no-referrer',
     body: JSON.stringify(data)
   });
-  return response.json();
 }
 
 export const getData = async (id: string) => {

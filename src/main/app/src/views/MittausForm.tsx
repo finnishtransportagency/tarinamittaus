@@ -157,8 +157,8 @@ const MittausForm = ({ mittaus }: { mittaus: MittausStore }) => {
     history.push("/mittauslista");
   };
 
-  const onClickUpdate = (values: any) => {
-    putData(values);
+  const onClickUpdate = async (values: any) => {
+    await putData(values);
     history.go(0);
   };
 
