@@ -84,7 +84,7 @@ public class MittausController {
     }
 
     @PutMapping
-    public void updateMittaus(
+    public ResponseEntity<Void> updateMittaus(
             @RequestBody MittausDto dto,
             HttpServletRequest request) {
         try {
@@ -94,6 +94,7 @@ public class MittausController {
             dto.setCreated_by_lx(remoteUser);
             mittausService.updateMittaus(dto);
             logger.info("Successfully updated mittaus with id {}", dto.getKohde_id());
+            return new ResponseEntity<Void>(HttpStatus.OK);
         } catch (Exception e) {
             logger.warn("Failed to update mittaus with id {}", dto.getKohde_id());
             throw new CustomNotFoundException();
