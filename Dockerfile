@@ -16,7 +16,9 @@ COPY --from=BUILD_FRONTEND /usr/src/app/dist/ /data/src/main/webapp/
 
 RUN cd /data && mvn clean install -Dmaven.test.skip=true
 
-FROM tomcat:7-jdk8-openjdk
+FROM tomcat:7.0.109-jdk8-adoptopenjdk-openj9
+
+RUN apt update && apt upgrade --quiet --yes
 
 RUN mkdir ${CATALINA_HOME}/webapps/tarinamittaus
 
