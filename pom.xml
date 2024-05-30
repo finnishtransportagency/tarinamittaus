@@ -108,7 +108,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
+        <!-- not sure of this -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -123,6 +123,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- need to add manually -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -134,6 +135,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- need to add manually -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
@@ -145,6 +147,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- need to add manually -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
@@ -160,6 +163,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- skip for now -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -188,6 +192,7 @@
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
+        <!-- skip, looks like maybe not needed -->
         <dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-servlet</artifactId>
@@ -238,6 +243,8 @@
             <version>1.12.257</version>
         </dependency>
 
+
+        <!-- add these manually -->
         <!-- JWT handling for AWS / cognito -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -256,6 +263,7 @@
             <version>0.11.2</version>
             <scope>runtime</scope>
         </dependency>
+        <!-- add this manually -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -263,6 +271,7 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- add these manually -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
