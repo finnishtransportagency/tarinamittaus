@@ -1,10 +1,10 @@
 package fi.tarina.tarinamittaus.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModelProperty;
+// import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -30,7 +30,7 @@ public class AnturikohtaisetTunnusarvot implements Serializable {
     private Integer tunnusarvo_id;
 
     @Column(name = "MITTAUSSUUNTA_XYZ")
-    @ApiModelProperty(value = "value to show", example = "X")
+    // @ApiModelProperty(value = "value to show", example = "X")
     private char mittaussuunta_xyz;
 
     @Column(name = "TARINAN_MAKSIMIARVO")

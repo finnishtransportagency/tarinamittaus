@@ -2,7 +2,7 @@ package fi.tarina.tarinamittaus.Model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.swagger.annotations.ApiModelProperty;
+// import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
@@ -11,7 +11,7 @@ public class AnturikohtaisetTunnusarvotDto implements Serializable {
 
     private Integer tunnusarvo_id;
 
-    @ApiModelProperty(value = "value to show", example = "X")
+    // @ApiModelProperty(value = "value to show", example = "X")
     private char mittaussuunta_xyz;
     private Double tarinan_maksimiarvo;
     private Double hallitseva_taajuus;

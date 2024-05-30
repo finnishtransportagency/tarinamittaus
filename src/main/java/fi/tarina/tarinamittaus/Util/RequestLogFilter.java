@@ -5,9 +5,9 @@ import fi.tarina.tarinamittaus.auth.JwtRequestFilter;
 import fi.tarina.tarinamittaus.auth.UserInfo;
 import org.apache.logging.log4j.ThreadContext;
 
-import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @WebFilter(urlPatterns = "/*")

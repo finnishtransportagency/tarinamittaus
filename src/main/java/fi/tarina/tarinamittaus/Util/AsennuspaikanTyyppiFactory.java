@@ -19,8 +19,8 @@ public class AsennuspaikanTyyppiFactory {
     public AsennuspaikanTyyppi create(AsennuspaikanTyyppiDto dto) {
         if (dto.getPaikkatyyppi_id() == null) return new AsennuspaikanTyyppi();
 
-        if (repository.exists(dto.getPaikkatyyppi_id()))
-            return repository.findOne(dto.getPaikkatyyppi_id());
+        if (repository.existsById(dto.getPaikkatyyppi_id()))
+            return repository.findById(dto.getPaikkatyyppi_id()).get();
 
         return new AsennuspaikanTyyppi();
     }

@@ -21,7 +21,7 @@ public class AnturikohtaisetTunnusarvotFactory {
     public AnturikohtaisetTunnusarvot create(AnturikohtaisetTunnusarvotDto dto){
         if (dto.getTunnusarvo_id() == null) return new AnturikohtaisetTunnusarvot();
 
-        if (repository.exists(dto.getTunnusarvo_id()))
+        if (repository.existsById(dto.getTunnusarvo_id()))
             return repository.getOne(dto.getTunnusarvo_id());
 
         return new AnturikohtaisetTunnusarvot();

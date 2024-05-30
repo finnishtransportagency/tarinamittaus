@@ -2,7 +2,7 @@ package fi.tarina.tarinamittaus.Model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.swagger.annotations.ApiModelProperty;
+// import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class AsennuspaikanTyyppiDto implements Serializable {
 
     private Integer paikkatyyppi_id;
-    @ApiModelProperty(value = "maa", example = "maa")
+    // @ApiModelProperty(value = "maa", example = "maa")
     private String selite;
     private String lisatiedot;
     private AsennettuAnturiDto asennettuAnturiDto;

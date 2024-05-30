@@ -3,14 +3,14 @@ package fi.tarina.tarinamittaus.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
+// import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import java.sql.Timestamp;
 import java.io.Serializable;
 import java.util.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "MITTAUS", schema = "TARINAM")
@@ -35,12 +35,12 @@ public class Mittaus implements Serializable {
 
     @Column(name = "ALKUAIKA")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Europe/Helsinki")
-    @ApiModelProperty(value = "value to show", example = "2021-04-27")
+    // @ApiModelProperty(value = "value to show", example = "2021-04-27")
     private Timestamp alkuaika;
 
     @Column(name = "LOPPUAIKA")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Europe/Helsinki")
-    @ApiModelProperty(value = "value to show", example = "2021-04-27")
+    // @ApiModelProperty(value = "value to show", example = "2021-04-27")
     private Timestamp loppuaika;
 
     @Column(name = "MITTAUS_ASIANHALLINTA_ID")
@@ -76,7 +76,7 @@ public class Mittaus implements Serializable {
     //mittaus refers to attribute in AsennettuAnturi class
     @OneToMany(mappedBy = "mittaus",
             fetch = FetchType.LAZY,
-            cascade = javax.persistence.CascadeType.ALL,
+            cascade = jakarta.persistence.CascadeType.ALL,
             orphanRemoval = true)
     @JsonProperty("asennettuAnturi")
     private List<AsennettuAnturi> asennettuAnturiSet = new ArrayList<>();
