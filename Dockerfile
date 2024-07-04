@@ -16,13 +16,9 @@ COPY --from=BUILD_FRONTEND /usr/src/app/dist/ /data/src/main/resources/static/
 
 RUN cd /data && mvn clean package -Dmaven.test.skip=true
 
-# FROM tomcat:7.0.109-jdk8-adoptopenjdk-openj9
 FROM amazoncorretto:17-alpine
 
-# TODO: re-enable these
-# RUN apt update && apt upgrade --quiet --yes
-# RUN apt install unzip --quiet --yes
-
+RUN apk --no-cache upgrade
 RUN mkdir tarinamittaus
 
 COPY --from=BUILD_BACKEND /data/target/tarinamittaus-app.jar tarinamittaus/
