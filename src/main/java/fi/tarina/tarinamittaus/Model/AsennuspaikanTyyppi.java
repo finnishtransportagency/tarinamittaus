@@ -2,10 +2,10 @@ package fi.tarina.tarinamittaus.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import fi.tarina.tarinamittaus.validator.Selite;
-import io.swagger.annotations.ApiModelProperty;
+// import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -33,7 +33,7 @@ public class AsennuspaikanTyyppi implements Serializable {
     private Integer paikkatyyppi_id;
 
     @Column(name = "SELITE")
-    @ApiModelProperty(value = "maa", example = "maa")
+    // @ApiModelProperty(value = "maa", example = "maa")
     @Selite
     private String selite;
 

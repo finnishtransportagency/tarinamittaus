@@ -1,6 +1,5 @@
 FROM 894932018761.dkr.ecr.eu-west-1.amazonaws.com/node:12-alpine as BUILD_FRONTEND
 
-
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
@@ -8,19 +7,18 @@ COPY ./src/main/app .
 RUN npm install
 RUN npm run build
 
-FROM 894932018761.dkr.ecr.eu-west-1.amazonaws.com/maven:3.6.0-jdk-11-slim AS BUILD_BACKEND
+FROM 894932018761.dkr.ecr.eu-west-1.amazonaws.com/maven:3.9-amazoncorretto-17 AS BUILD_BACKEND
 
 COPY ./src/main/java /data/src/main/java
 COPY ./src/main/resources /data/src/main/resources
 COPY pom.xml /data/
-COPY --from=BUILD_FRONTEND /usr/src/app/dist/ /data/src/main/webapp/
+COPY --from=BUILD_FRONTEND /usr/src/app/dist/ /data/src/main/resources/static/
 
-RUN cd /data && mvn clean install -Dmaven.test.skip=true
+RUN cd /data && mvn clean package -Dmaven.test.skip=true
 
-FROM 894932018761.dkr.ecr.eu-west-1.amazonaws.com/tomcat:7.0.109-jdk8-adoptopenjdk-openj9
+FROM 894932018761.dkr.ecr.eu-west-1.amazonaws.com/amazoncorretto:17-alpine
 
-RUN apt update && apt upgrade --quiet --yes
-RUN apt install unzip --quiet --yes
+RUN apk --no-cache upgrade
 
 ARG ENVIRONMENT_VALUE
 ARG AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
@@ -36,7 +34,7 @@ RUN echo ${AWS_CONTAINER_CREDENTIALS_FULL_URI}
 
 RUN printenv
 
-RUN mkdir ${CATALINA_HOME}/webapps/tarinamittaus
+RUN mkdir tarinamittaus
 
-COPY --from=BUILD_BACKEND /data/target/TarinamittausUI.war ${CATALINA_HOME}/webapps/tarinamittaus/TarinamittausUI.war
-RUN unzip ${CATALINA_HOME}/webapps/tarinamittaus/TarinamittausUI.war -d ${CATALINA_HOME}/webapps/ROOT
+COPY --from=BUILD_BACKEND /data/target/tarinamittaus-app.jar tarinamittaus/
+ENTRYPOINT [ "java", "-jar", "tarinamittaus/tarinamittaus-app.jar" ]

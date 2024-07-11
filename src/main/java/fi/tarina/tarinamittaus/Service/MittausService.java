@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -137,17 +137,17 @@ public class MittausService {
     @Transactional
     public Mittaus getMittaus(Integer id) {
 
-        Mittaus mittaus = mittausRepository.findOne(id);
+        Mittaus mittaus = mittausRepository.findById(id).get();
         return mittaus;
     }
 
     @Transactional
     public void deleteMittaus(Integer id) {
-        boolean exists = mittausRepository.exists(id);
+        boolean exists = mittausRepository.existsById(id);
         if (!exists) {
             throw new IllegalStateException("Mittaus with id " + id + " doesn't exist");
         } else {
-            mittausRepository.delete(id);
+            mittausRepository.deleteById(id);
         }
     }
 

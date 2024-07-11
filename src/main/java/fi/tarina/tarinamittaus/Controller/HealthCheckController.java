@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(path = "/rest/health/")
+@RequestMapping(path = "/rest/health")
 public class HealthCheckController {
     private static Logger logger = LogManager.getLogger(HealthCheckController.class);
 
-    @GetMapping(path = "")
+    @GetMapping(path = {"", "/"})
     public ResponseEntity<String> healthCheck() {
         logger.debug("Health check called");
         return new ResponseEntity<>("healthy", HttpStatus.OK);

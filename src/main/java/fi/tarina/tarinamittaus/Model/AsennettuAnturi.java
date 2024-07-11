@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
@@ -63,7 +63,7 @@ public class AsennettuAnturi implements Serializable {
 
     @OneToMany(mappedBy = "asennettuAnturi",
             fetch = FetchType.LAZY,
-            cascade = javax.persistence.CascadeType.ALL,
+            cascade = jakarta.persistence.CascadeType.ALL,
             orphanRemoval = true)
     @JsonProperty("anturikohtaisetTunnusarvot")
     private List<AnturikohtaisetTunnusarvot> anturikohtaisetTunnusarvotSet = new ArrayList<>();

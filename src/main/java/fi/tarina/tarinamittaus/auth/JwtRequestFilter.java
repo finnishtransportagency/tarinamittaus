@@ -6,12 +6,12 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.SecurityException;
-import org.apache.commons.codec.binary.Base64;
+// import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import javax.net.ssl.HttpsURLConnection;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -21,6 +21,7 @@ import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -64,7 +65,7 @@ public class JwtRequestFilter {
     private Claims decodeJWT(String jwt, String key, boolean isForce) throws NoSuchAlgorithmException, InvalidKeySpecException {
         if (isForce || ecPublicKey == null) {
             logger.debug("ecPublicKey is null");
-            byte[] publicKeyBytes = Base64.decodeBase64(key);
+            byte[] publicKeyBytes = Base64.getDecoder().decode(key);
             X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicKeyBytes);
             KeyFactory keyFactory = KeyFactory.getInstance("EC");
             ecPublicKey = keyFactory.generatePublic(keySpec);
@@ -87,7 +88,7 @@ public class JwtRequestFilter {
             }
             if (jwt != null) {
                 String jwt_headers = jwt.split("\\.")[0];
-                String decoded_jwt_headers = new String(Base64.decodeBase64(jwt_headers));
+                String decoded_jwt_headers = new String(Base64.getDecoder().decode(jwt_headers));
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode jsonNode = objectMapper.readTree(decoded_jwt_headers);
 

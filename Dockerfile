@@ -7,21 +7,19 @@ COPY ./src/main/app .
 RUN npm install
 RUN npm run build
 
-FROM maven:3.6.0-jdk-11-slim AS BUILD_BACKEND
+FROM maven:3.9-amazoncorretto-17 AS BUILD_BACKEND
 
 COPY ./src/main/java /data/src/main/java
 COPY ./src/main/resources /data/src/main/resources
 COPY pom.xml /data/
-COPY --from=BUILD_FRONTEND /usr/src/app/dist/ /data/src/main/webapp/
+COPY --from=BUILD_FRONTEND /usr/src/app/dist/ /data/src/main/resources/static/
 
-RUN cd /data && mvn clean install -Dmaven.test.skip=true
+RUN cd /data && mvn clean package -Dmaven.test.skip=true
 
-FROM tomcat:7.0.109-jdk8-adoptopenjdk-openj9
+FROM amazoncorretto:17-alpine
 
-RUN apt update && apt upgrade --quiet --yes
-RUN apt install unzip --quiet --yes
+RUN apk --no-cache upgrade
+RUN mkdir tarinamittaus
 
-RUN mkdir ${CATALINA_HOME}/webapps/tarinamittaus
-
-COPY --from=BUILD_BACKEND /data/target/TarinamittausUI.war ${CATALINA_HOME}/webapps/tarinamittaus/TarinamittausUI.war
-RUN unzip ${CATALINA_HOME}/webapps/tarinamittaus/TarinamittausUI.war -d ${CATALINA_HOME}/webapps/ROOT
+COPY --from=BUILD_BACKEND /data/target/tarinamittaus-app.jar tarinamittaus/
+ENTRYPOINT [ "java", "-jar", "tarinamittaus/tarinamittaus-app.jar" ]

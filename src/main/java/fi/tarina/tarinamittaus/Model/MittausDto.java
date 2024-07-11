@@ -2,7 +2,7 @@ package fi.tarina.tarinamittaus.Model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
+// import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -15,11 +15,11 @@ public class MittausDto implements Serializable {
     private Integer kohde_id;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Europe/Helsinki")
-    @ApiModelProperty(value = "value to show", example = "2021-04-27")
+    // @ApiModelProperty(value = "value to show", example = "2021-04-27")
     private Timestamp alkuaika;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Europe/Helsinki")
-    @ApiModelProperty(value = "value to show", example = "2021-04-27")
+    // @ApiModelProperty(value = "value to show", example = "2021-04-27")
     private Timestamp loppuaika;
 
     private String mittaus_asianhallinta_id;

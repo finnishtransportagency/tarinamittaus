@@ -20,8 +20,8 @@ public class AsennettuAnturiFactory {
     public AsennettuAnturi create(AsennettuAnturiDto dto) {
         if(dto.getAsennuskohtainen_id()==null) return new AsennettuAnturi();
 
-        if (anturiRepository.exists(dto.getAsennuskohtainen_id()))
-            return anturiRepository.findOne(dto.getAsennuskohtainen_id());
+        if (anturiRepository.existsById(dto.getAsennuskohtainen_id()))
+            return anturiRepository.findById(dto.getAsennuskohtainen_id()).get();
 
         return new AsennettuAnturi();
 

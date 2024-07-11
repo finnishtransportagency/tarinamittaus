@@ -5,6 +5,9 @@ import fi.tarina.tarinamittaus.Model.MittausDto;
 import fi.tarina.tarinamittaus.Service.MittausService;
 import fi.tarina.tarinamittaus.Specification.MittausSearchParameters;
 import fi.tarina.tarinamittaus.auth.Constants;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,7 +29,7 @@ public class MittausController {
         this.mittausService = mittausService;
     }
 
-    @GetMapping
+    @GetMapping(path = {"", "/"})
     public List<Mittaus> find(
             MittausSearchParameters parameters
                              ) {
@@ -40,7 +41,7 @@ public class MittausController {
         }
     }
 
-    @GetMapping(path = "{id}")
+    @GetMapping(path ={"{id}", "{id}/"})
     public ResponseEntity<Mittaus> getById(@PathVariable("id") Integer id) {
         logger.info("Get mittaus with id {}", id);
         try {
@@ -52,7 +53,7 @@ public class MittausController {
     }
 
 
-    @PostMapping
+    @PostMapping(path = {"", "/"})
     public ResponseEntity<Mittaus> saveMittaus(
             @Valid @RequestBody Mittaus mittausRequest,
             HttpServletRequest request) {
@@ -70,7 +71,7 @@ public class MittausController {
         }
     }
 
-    @DeleteMapping(path = "{id}")
+    @DeleteMapping(path = {"{id}", "{id}/"})
     public ResponseEntity<Mittaus> deleteMittaus(@PathVariable("id") Integer id) {
         try {
             logger.info("Removing mittaus with id {}", id);
@@ -83,7 +84,7 @@ public class MittausController {
         }
     }
 
-    @PutMapping
+    @PutMapping(path = {"", "/"})
     public ResponseEntity<Void> updateMittaus(
             @RequestBody MittausDto dto,
             HttpServletRequest request) {
@@ -101,7 +102,7 @@ public class MittausController {
         }
     }
 
-    @GetMapping(path = "/test")
+    @GetMapping(path = {"/test", "/test/"})
     public ResponseEntity<String> test() {
         return new ResponseEntity<>("This works", HttpStatus.OK);
     }
