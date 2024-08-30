@@ -40,9 +40,11 @@ Infrakoodi: https://github.com/finnishtransportagency/tietokatalogi-infra
 ### Branchit ja workflow
 
 Työbranchi (pyritään nimeämään ANALPK-XXXX_lyhytkuvaus) -> dev -> main
+Uudet työbranchit luodaan devin perusteella.
 
 - dev: Branchit mergetään tänne, tai pienemmät muutokset suoraan tänne. Päivittyy testipalvelimelle.
-- main: Päivittyy tuotantopalvelimelle
+- main: Suositaan fast-forward -mergeä devistä tänne. Päivittyy tuotantopalvelimelle.
+
 
 ## Komponentit
 
