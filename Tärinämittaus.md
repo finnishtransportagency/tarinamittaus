@@ -39,10 +39,10 @@ Infrakoodi: https://github.com/finnishtransportagency/tietokatalogi-infra
 
 ### Branchit ja workflow
 
-Työbranchi (pyritään nimeämään ANALPK-XXXX_lyhytkuvaus) -> dev -> master
+Työbranchi (pyritään nimeämään ANALPK-XXXX_lyhytkuvaus) -> dev -> main
 
 - dev: Branchit mergetään tänne, tai pienemmät muutokset suoraan tänne. Päivittyy testipalvelimelle.
-- master: Päivittyy tuotantopalvelimelle
+- main: Päivittyy tuotantopalvelimelle
 
 ## Komponentit
 
@@ -79,4 +79,4 @@ Sovellusta ajetaan kontitettuna AWS:n ECS:ssä Väyläpilvi-ympäristössä.
 
 ## Julkaisu
 
-Julkaisu testi- ja tuotantoympäristöihin tapahtuu puskemalla koodia dev- ja prod-haaroihin, vastaavasti.
+Julkaisu testi- ja tuotantoympäristöihin tapahtuu puskemalla koodia dev- ja main-haaroihin, vastaavasti.
