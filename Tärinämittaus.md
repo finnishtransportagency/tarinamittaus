@@ -1,25 +1,24 @@
 # Tärinämittaus
 
-Java Springillä Reactilla tehty lomakeprojekti, johon voi tallentaa tärinämittaus tuloksia.
+Java Springillä Reactilla tehty lomakeprojekti, johon voi tallentaa tärinämittaus-tuloksia.
 
 ## Yleistä
 
-Käyttöliittymä on tehty reactilla. Palvelin Java Spring Bootilla. Tietokantana Oracle.
+Käyttöliittymä on tehty reactilla. Palvelin Java Spring Bootilla. Tietokantana PostgreSQL.
 
 Projektin kansiorakenne pääpiirteissään:
 
-- db: Sisältää oracle skriptit kannan pystyttämiseen esim lokaalia kehitystä varten.
-- deployment: Tiedostot  ja skriptit deploymista varten. Deploymislogiikka on kopioitu tietokatalogista. Ks kohta julkaisu
-- lib: Oracle legacy ajurit
-- src/main: Sisältää sekä käyttöliittymäkoodin kansiossa ```app``` ja palvelimen ```java```
-- resources Javan käyttämät asetustiedostot
-- build.sh: Skripti projektin buildaamiseen, käytetään julkaisuvaiheessa.
-- Dockerfile_oracle: Dockerfile lokaalin dockerin pystyttämiseen.
-- start_oracle_docker.sh: Skripti dockerin pystyttämiseen.
+- db: Sisältää sql skriptit kannan pystyttämiseen esim lokaalia kehitystä varten.
+- src/main: Sisältää sekä frontendin kansiossa ```app``` ja backendin kansiossa ```java```
+- src/main/resources Javan käyttämät asetustiedostot
+- src/main/static Tänne siirretään buildattu frontend-projekti, jotta spring boot osaa tarjota sen selaimelle
+- Dockerfile_postgres: Dockerfile lokaalin dockerin pystyttämiseen.
+- Dockerfile: Paikallinen dockerfile
+- Dockerfile.aws: AWS-ympäristössä ajettava dockerfile
+- docker-compose.yaml: Pystyttää koko projektin paikallisesti
 
 Palvelimen kansiorakenne:
-
-- Configs: konfiguraatiot swaggeriin ja tietokantayhteyden muodostamiseen. HUOM! Tällä hetkellä softa osaa lukea konfiguraatiot vain ```PersistenceJPAConfig.java``` tiedostosta. Eli hibernate.cfg ei toimi jostain syystä. (5.7.2021)
+- auth: Käyttäjän tunnistaminen json web tokenin avulla
 - Specification: Asetukset hakuoperaatioita varten
 - Util: dto - model mäppäykset käyttäen mapstruct pakettia <https://mapstruct.org/>
 - validator: Kustomoitu validaatioyritelmä kutsuihin, ei käytössä tällä hetkellä.
@@ -35,36 +34,37 @@ Käyttöliittymän kansiorakenne:
 
 ## Git
 
-Tällä hetkellä kaikki koodi on repositoriossa <https://github.com/finnishtransportagency/Tarinamittaus-Backend> Projektin toinen branchi <https://github.com/finnishtransportagency/Tarinamittaus-UI> on tällä hetkellä vielä tyhjä, otetaan käyttöön siinä vaiheessa kun migraatio on tehty aws:sään.
+Sovelluskoodi on repositoriossa <https://github.com/finnishtransportagency/tarinamittaus>.
+Infrakoodi: https://github.com/finnishtransportagency/tietokatalogi-infra
 
 ### Branchit ja workflow
 
-Työbranchi (pyritään nimeämään ANALPK-XXXX_lyhytkuvaus) -> master -> test2 -> production
+Työbranchi (pyritään nimeämään ANALPK-XXXX_lyhytkuvaus) -> dev -> main
+Uudet työbranchit luodaan devin perusteella.
 
-- downgrade: yhteensopiva Tomcat 7 palvelimen kanssa, julkaisut tästä branchista Väylään. Myöhemmin aws:n kanssa voidaan poistaa käytöstä
-- test2: Testibranchi, myöhemmin julkaisut tästä testiympäristöön
-- master: Työbranchit mergetään masteriin, josta tehdään taas puolestaan testiin ja tuotantoon
-- production: Ei vielä luotu
+- dev: Branchit mergetään tänne, tai pienemmät muutokset suoraan tänne. Päivittyy testipalvelimelle.
+- main: Suositaan fast-forward -mergeä devistä tänne. Päivittyy tuotantopalvelimelle.
+
 
 ## Komponentit
 
 ### Tietokanta
 
-- Oracle 11g
-- Testikanta on osoitteessa ```jdbc:oracle:thin:@***REMOVED***:1521:***REMOVED***```
-- Skeema ```tarinam```
+- Postgres
+- Tietokannat: https://extranet.vayla.fi/wiki/pages/viewpage.action?pageId=17076833
+- Suoran yhteyden muodostaminen tietokantoihin: https://extranet.vayla.fi/wiki/display/tietokatalogi/Kantayhteys+omalta+koneelta
+- Paikallista kehitystä varten paikallinen kanta dockerilla
+- Yhteysasetukset: https://extranet.vayla.fi/wiki/display/tietokatalogi/Tietokatalogi+Asennusohje ja aws secretsmanager
 
 ### Backend
 
-Huom! Alla olevat versiot ovat downgrade branchistä, lukuunottamatta Javan versiota jolla ohjelma on tehty. Nämä ovat tarkoituksella alennettuja versioita yhteensopivuuden saamiseksi Väylän Tomcat 7 palvelimelle. <https://github.com/finnishtransportagency/Tarinamittaus-Backend/commit/4b658c2f7a93d00f5c8dc0c0043eda973c263c86>
-
-- Java versio 1.8
-- Java Spring Boot 1.5.22.RELEASE
-- Java Spring 4.3.25.RELEASE
-- JPA 2.1
-- Hibernate 5.0.12.Final
-- Hibernate Validator 5.3.6.Final
-- tomcat-embed-core 7.0.47
+- Java-versio 17
+- Java Spring Boot 3.3.0
+- Java Spring 6.1.8
+- JPA 3.1.0
+- Hibernate 6.5.2
+- Hibernate Validator 8.0.1.Final
+- tomcat-embed-core 10.1.24
 
 ### Frontend
 
@@ -77,14 +77,8 @@ Huom! Alla olevat versiot ovat downgrade branchistä, lukuunottamatta Javan vers
 
 ### Palvelin
 
-Tomcat 7 väylän ylläpitämä. Siirtyy aws:sään myöhemmin.
+Sovellusta ajetaan kontitettuna AWS:n ECS:ssä Väyläpilvi-ympäristössä.
 
 ## Julkaisu
 
-Julkaisu tapahtuu samalla perjaattella kuin Tietokatalogiin. Muista käyttää oikeaa tiedostoa `xxx_test` tai `xxx_prod` riippuen ympäristöstä.
-
-- password.txt tiedostoon kopioidaan salasana.
-- ```cd deployment```
-- ```inventory/inventory_test``` enkryptaus/dekryptaus tapahtuu komennolla ```ansible-vault encrypt/decrypt inventory/inventory_test```. HUOM inventory_test tiedostossa olevia muuttujia ei käytetä mihinkään tällä hetkellä, lukuunottamatta ktunnusta. Tietokatalogissa nämä kopioitaisiin hibernate.template.cfg:hen joka sitten puolestaan kopioidaan palvelimelle.
-- `inventory_test` pitää olla enkryptattuna ennen julkaisun aloittamista.
-- Aloita julkaisu ajamalla ```sh deploy_tarina_test.sh```
+Julkaisu testi- ja tuotantoympäristöihin tapahtuu puskemalla koodia dev- ja main-haaroihin, vastaavasti.
