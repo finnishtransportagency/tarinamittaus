@@ -1,7 +1,6 @@
 import React from "react";
 import { Formik, FieldArray as FFieldArray } from "formik";
 import * as Yup from "yup";
-import MittausStore from "../stores/MittausStore";
 import { FormikCustomDatePicker } from "../components/CustomDatePicker";
 import { CustomNumber } from "../components/CustomNumber";
 import { CustomText } from "../components/CustomText";
@@ -129,7 +128,7 @@ const initializeEmptyFields = (data: any): any => {
   return data === null ? "" : data;
 };
 
-const MittausForm = ({ mittaus }: { mittaus: MittausStore }) => {
+const MittausForm = () => {
   const [fetchedValues, setFetchedValues] = React.useState<IMittaus | null>(
     null
   );
