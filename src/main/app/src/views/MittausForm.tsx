@@ -348,17 +348,18 @@ const MittausForm = ({ mittaus }: { mittaus: MittausStore }) => {
 
 export default MittausForm;
 
-export const DisplayFormikState = (props: any) => (
-  <div style={{ margin: "1rem 0" }}>
-    <h3 style={{ fontFamily: "monospace" }} />
-    <pre
-      style={{
-        background: "#f6f8fa",
-        fontSize: "1.25rem",
-        padding: ".5rem",
-      }}
-    >
-      <strong>props</strong> = {JSON.stringify(props, null, 2)}
-    </pre>
-  </div>
-);
+// For debugging only
+// export const DisplayFormikState = (props: any) => (
+//   <div style={{ margin: "1rem 0" }}>
+//     <h3 style={{ fontFamily: "monospace" }} />
+//     <pre
+//       style={{
+//         background: "#f6f8fa",
+//         fontSize: "1.25rem",
+//         padding: ".5rem",
+//       }}
+//     >
+//       <strong>props</strong> = {JSON.stringify(props, null, 2)}
+//     </pre>
+//   </div>
+// );
