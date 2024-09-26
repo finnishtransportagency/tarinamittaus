@@ -4,7 +4,6 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import { Switch, Route, Link, HashRouter } from 'react-router-dom';
 
-import './App.css';
 import urljoin from "url-join";
 import routes from './App.routes';
 
