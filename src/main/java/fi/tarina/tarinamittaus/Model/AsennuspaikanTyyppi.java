@@ -24,6 +24,7 @@ public class AsennuspaikanTyyppi implements Serializable {
     @SequenceGenerator(
             name = "seq_gen",
             sequenceName = "paikka_id_seq",
+            schema = "tarinam",
             allocationSize = 1
     )
     @GeneratedValue(

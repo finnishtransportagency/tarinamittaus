@@ -21,6 +21,7 @@ public class AnturikohtaisetTunnusarvot implements Serializable {
     @SequenceGenerator(
             name = "seq_gen",
             sequenceName = "tunnusarvo_id_seq",
+            schema = "tarinam",
             allocationSize = 1
     )
     @GeneratedValue(

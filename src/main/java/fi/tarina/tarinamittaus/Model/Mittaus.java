@@ -25,6 +25,7 @@ public class Mittaus implements Serializable {
     @SequenceGenerator(
             name = "seq_gen",
             sequenceName = "mittaus_id_seq",
+            schema = "tarinam",
             allocationSize = 1
     )
     @GeneratedValue(

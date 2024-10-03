@@ -21,6 +21,7 @@ public class AsennettuAnturi implements Serializable {
     @SequenceGenerator(
             name = "seq_gen",
             sequenceName = "asennettuanturi_id_seq",
+            schema = "tarinam",
             allocationSize = 1
     )
     @GeneratedValue(
