@@ -1,26 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from "mobx-react";
 
 //Importing the bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/styles.css';
 
-import MittausStore from './stores/MittausStore';
-
-
-const stores = {
-    mittausStore: MittausStore
-}
 
 ReactDOM.render(
     <React.StrictMode>
-        <Provider {...stores}>
-            <App/>
-        </Provider>
+        <App/>
     </React.StrictMode>,
     document.getElementById('root')
 );

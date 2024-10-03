@@ -4,7 +4,6 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import { Switch, Route, Link, HashRouter } from 'react-router-dom';
 
-import './App.css';
 import urljoin from "url-join";
 import routes from './App.routes';
 
@@ -43,24 +42,15 @@ function App() {
 
 export default App;
 
-// This comes as undefined for some reason
-// const BaseRestURL =
-//     process.env.REACT_APP_BASE_REST_URL || "tarinamittaus/mittaus";
 
 export function fullURL(...urls: string[]) {
-    // NB: user with browserhistory
-    // return urljoin(`/${BaseURL}`, ...urls);
     return urljoin(...urls);
 }
 
-export function fullRestURL(...urls: string[]) {
+export function fullRestURL() {
     // This works
     const BaseRestURL =
         process.env.REACT_APP_BASE_REST_URL || "rest/mittaus/";
 
-    //--- degugging ---
-    const urlstring = urljoin(`/${BaseRestURL}`, ...urls);
-    console.log(`urlstring: ${urlstring}, baserestURL ${BaseRestURL}`);
-    //---
-    return urljoin(`/${BaseRestURL}`, ...urls);
+    return urljoin(`/${BaseRestURL}`);
 }

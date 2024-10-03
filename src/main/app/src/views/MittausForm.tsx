@@ -1,12 +1,11 @@
 import React from "react";
 import { Formik, FieldArray as FFieldArray } from "formik";
 import * as Yup from "yup";
-import MittausStore from "../stores/MittausStore";
 import { FormikCustomDatePicker } from "../components/CustomDatePicker";
 import { CustomNumber } from "../components/CustomNumber";
 import { CustomText } from "../components/CustomText";
 import AsennettuAnturiForm from "./AsennettuAnturiForm";
-import AsennettuAnturiStore from "../stores/AsennettuAnturiStore";
+import AsennettuAnturi from "../entities/AsennettuAnturi";
 import { Form as FForm } from "formik";
 import { Button } from "react-bootstrap";
 import SeliteTypeEnum from "../types/enums/seliteType.enum";
@@ -129,7 +128,7 @@ const initializeEmptyFields = (data: any): any => {
   return data === null ? "" : data;
 };
 
-const MittausForm = ({ mittaus }: { mittaus: MittausStore }) => {
+const MittausForm = () => {
   const [fetchedValues, setFetchedValues] = React.useState<IMittaus | null>(
     null
   );
@@ -249,7 +248,7 @@ const MittausForm = ({ mittaus }: { mittaus: MittausStore }) => {
                   <Button
                     style={{ margin: "6px" }}
                     onClick={() =>
-                      arrayHelpers.push(new AsennettuAnturiStore())
+                      arrayHelpers.push(new AsennettuAnturi())
                     }
                   >
                     Lisää anturi
@@ -348,17 +347,18 @@ const MittausForm = ({ mittaus }: { mittaus: MittausStore }) => {
 
 export default MittausForm;
 
-export const DisplayFormikState = (props: any) => (
-  <div style={{ margin: "1rem 0" }}>
-    <h3 style={{ fontFamily: "monospace" }} />
-    <pre
-      style={{
-        background: "#f6f8fa",
-        fontSize: "1.25rem",
-        padding: ".5rem",
-      }}
-    >
-      <strong>props</strong> = {JSON.stringify(props, null, 2)}
-    </pre>
-  </div>
-);
+// For debugging only
+// export const DisplayFormikState = (props: any) => (
+//   <div style={{ margin: "1rem 0" }}>
+//     <h3 style={{ fontFamily: "monospace" }} />
+//     <pre
+//       style={{
+//         background: "#f6f8fa",
+//         fontSize: "1.25rem",
+//         padding: ".5rem",
+//       }}
+//     >
+//       <strong>props</strong> = {JSON.stringify(props, null, 2)}
+//     </pre>
+//   </div>
+// );

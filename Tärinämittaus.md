@@ -69,7 +69,6 @@ Uudet työbranchit luodaan devin perusteella.
 ### Frontend
 
 - react 17.0.2
-- mobx 6.3.0 <https://mobx.js.org/README.html>
 - bootstrap 3.4.1 <https://getbootstrap.com/>
 - formik 2.2.6 <https://formik.org/>
 - typescript 4.1.2
