@@ -5,7 +5,7 @@ import { FormikCustomDatePicker } from "../components/CustomDatePicker";
 import { CustomNumber } from "../components/CustomNumber";
 import { CustomText } from "../components/CustomText";
 import AsennettuAnturiForm from "./AsennettuAnturiForm";
-import AsennettuAnturiStore from "../stores/AsennettuAnturiStore";
+import AsennettuAnturi from "../stores/AsennettuAnturiStore";
 import { Form as FForm } from "formik";
 import { Button } from "react-bootstrap";
 import SeliteTypeEnum from "../types/enums/seliteType.enum";
@@ -248,7 +248,7 @@ const MittausForm = () => {
                   <Button
                     style={{ margin: "6px" }}
                     onClick={() =>
-                      arrayHelpers.push(new AsennettuAnturiStore())
+                      arrayHelpers.push(new AsennettuAnturi())
                     }
                   >
                     Lisää anturi

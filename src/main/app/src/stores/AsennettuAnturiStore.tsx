@@ -1,7 +1,7 @@
 import MittausSuuntaTypeEnum from "../types/enums/mittausSuuntaType.enum";
 import { IAnturikohtaisetTunnusarvo } from "../types/interfaces/anturikohtaisetTunnusarvot.interface";
 import IAsennettuAnturi from "../types/interfaces/asennettuAnturi.interface";
-import AsennuspaikanTyyppiStore from "./AsennuspaikanTyyppiStore";
+import AsennuspaikanTyyppi from "./AsennuspaikanTyyppiStore";
 
 
 const tunnusArvot: IAnturikohtaisetTunnusarvo[] = [
@@ -24,13 +24,13 @@ const tunnusArvot: IAnturikohtaisetTunnusarvo[] = [
     tarinan_tunnusluku_vw95_rms: 0,
   }
 ];
-export default class AsennettuAnturiStore implements IAsennettuAnturi {
+export default class AsennettuAnturi implements IAsennettuAnturi {
   malli = '';
   gps_lat = 0;
   gps_long = 0;
   etaisyys_radasta_jos_eri = 0;
   kerros = 0;
   sijoituspaikan_lisaselite = '';
-  asennuspaikanTyyppi = new AsennuspaikanTyyppiStore();
+  asennuspaikanTyyppi = new AsennuspaikanTyyppi();
   anturikohtaisetTunnusarvot = tunnusArvot;
 }

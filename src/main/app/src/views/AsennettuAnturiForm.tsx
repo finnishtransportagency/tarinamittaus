@@ -3,16 +3,16 @@ import { Col, Form, Row } from "react-bootstrap";
 
 import { StackedNumber } from "../components/StackedNumber";
 import { StackedText } from "../components/StackedText";
-import AsennettuAnturiStore from "../stores/AsennettuAnturiStore";
 import AnturikohtaisetTunnusarvotForm from "./AnturikohtaisetTunnusarvotForm";
 import AsennuspaikanTyyppiForm from "./AsennuspaikanTyyppiForm";
+import IAsennettuAnturi from "../types/interfaces/asennettuAnturi.interface";
 
 const AsennettuAnturiForm = ({
   asennettuAnturi,
   namespace,
   index,
 }: {
-  asennettuAnturi: AsennettuAnturiStore;
+  asennettuAnturi: IAsennettuAnturi;
   namespace: string;
   index: number;
 }) => {
