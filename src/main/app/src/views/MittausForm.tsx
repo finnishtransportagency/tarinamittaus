@@ -5,7 +5,7 @@ import { FormikCustomDatePicker } from "../components/CustomDatePicker";
 import { CustomNumber } from "../components/CustomNumber";
 import { CustomText } from "../components/CustomText";
 import AsennettuAnturiForm from "./AsennettuAnturiForm";
-import AsennettuAnturi from "../stores/AsennettuAnturiStore";
+import AsennettuAnturi from "../entities/AsennettuAnturi";
 import { Form as FForm } from "formik";
 import { Button } from "react-bootstrap";
 import SeliteTypeEnum from "../types/enums/seliteType.enum";

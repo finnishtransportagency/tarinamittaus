@@ -1,7 +1,7 @@
 import MittausSuuntaTypeEnum from "../types/enums/mittausSuuntaType.enum";
 import { IAnturikohtaisetTunnusarvo } from "../types/interfaces/anturikohtaisetTunnusarvot.interface";
 import IAsennettuAnturi from "../types/interfaces/asennettuAnturi.interface";
-import AsennuspaikanTyyppi from "./AsennuspaikanTyyppiStore";
+import AsennuspaikanTyyppi from "./AsennuspaikanTyyppi";
 
 
 const tunnusArvot: IAnturikohtaisetTunnusarvo[] = [
