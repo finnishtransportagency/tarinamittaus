@@ -54,7 +54,7 @@ COPY . .
 ENV PATH /opt/tarinamittausUI/node_modules/.bin:$PATH
 
 # Install required dependencies inside the container
-RUN npm install --legacy-peer-deps
+RUN npm install
 RUN npm cache clean --force
 RUN webpack --config webpack.$NODE_ENV.ts --mode $NODE_ENV
 

@@ -4,7 +4,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY ./src/main/app .
-RUN npm install --legacy-peer-deps
+RUN npm install
 RUN npm run build
 
 FROM maven:3.9-amazoncorretto-17 AS BUILD_BACKEND
