@@ -25,7 +25,7 @@
 
 # Set base image
 # See available options on https://hub.docker.com/_/node
-FROM node:14.7-alpine AS builder
+FROM node:20-alpine AS builder
 
 
 # Set arguments which can be later overwritten higher in hierarchy with ex. Docker Compose, or .gitlab-ci.yml
@@ -54,7 +54,7 @@ COPY . .
 ENV PATH /opt/tarinamittausUI/node_modules/.bin:$PATH
 
 # Install required dependencies inside the container
-RUN npm install
+RUN npm install --legacy-peer-deps
 RUN npm cache clean --force
 RUN webpack --config webpack.$NODE_ENV.ts --mode $NODE_ENV
 

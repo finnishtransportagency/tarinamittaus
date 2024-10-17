@@ -20,4 +20,3 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "8081:8080"
-
