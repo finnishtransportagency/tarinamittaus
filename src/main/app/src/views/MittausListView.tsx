@@ -17,6 +17,7 @@ const MittausListView: React.FC = (): JSX.Element => {
     const [activePage, setActivePage] = React.useState<number>(0);
     const [nItems, setNItems] = React.useState<number>(0);
     const [sortOrder, setSortOrder] = React.useState<'asc' | 'desc'>('asc');
+
     const [sortColumn, setSortColumn] = React.useState<'kohde_id' | 'katuosoite'>('kohde_id');
     const [searchText, setSearchText] = React.useState<string>('');
 
@@ -35,6 +36,7 @@ const MittausListView: React.FC = (): JSX.Element => {
     React.useEffect(() => {
         fetchAndSetData();
     }, []);
+
 
     const handleSort = (column: 'kohde_id' | 'katuosoite'): void => {
         const sortedData = [...mittausData].sort((a, b) => {
