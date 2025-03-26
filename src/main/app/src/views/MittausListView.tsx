@@ -17,6 +17,7 @@ const MittausListView: React.FC = (): JSX.Element => {
     const [activePage, setActivePage] = React.useState<number>(0);
     const [nItems, setNItems] = React.useState<number>(0);
     const [sortOrder, setSortOrder] = React.useState<'asc' | 'desc'>('asc');
+    const [sortColumn, setSortColumn] = React.useState<'kohde_id' | 'katuosoite'>('kohde_id');
     const [searchText, setSearchText] = React.useState<string>('');
 
     const fetchAndSetData = async (): Promise<void> => {
@@ -35,16 +36,17 @@ const MittausListView: React.FC = (): JSX.Element => {
         fetchAndSetData();
     }, []);
 
-    const handleSort = (): void => {
+    const handleSort = (column: 'kohde_id' | 'katuosoite'): void => {
         const sortedData = [...mittausData].sort((a, b) => {
             if (sortOrder === 'asc') {
-                return b.kohde_id - a.kohde_id;
+                return a[column] < b[column] ? 1 : -1;
             } else {
-                return a.kohde_id - b.kohde_id;
+                return a[column] > b[column] ? 1 : -1;
             }
         });
         setMittausData(sortedData);
         setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+        setSortColumn(column);
     };
 
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -79,14 +81,14 @@ const MittausListView: React.FC = (): JSX.Element => {
             <Table striped>
                 <thead>
                 <tr>
-                    <th onClick={handleSort} style={{ cursor: 'pointer' }}>
-                        Kohdetunnus {sortOrder === 'asc' ? '▲' : '▼'}
+                    <th onClick={() => handleSort('kohde_id')} style={{ cursor: 'pointer' }}>
+                        Kohdetunnus {sortColumn === 'kohde_id' && (sortOrder === 'asc' ? '▲' : '▼')}
                     </th>
                     <th>
                         Alkuaika - loppuaika
                     </th>
-                    <th>
-                        Katuosoite
+                    <th onClick={() => handleSort('katuosoite')} style={{ cursor: 'pointer' }}>
+                        Katuosoite {sortColumn === 'katuosoite' && (sortOrder === 'asc' ? '▲' : '▼')}
                     </th>
                     <th>
                         Postinumero
