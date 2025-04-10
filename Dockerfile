@@ -1,4 +1,4 @@
-FROM node:12-alpine as BUILD_FRONTEND
+FROM node:20-alpine as BUILD_FRONTEND
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
