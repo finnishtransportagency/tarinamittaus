@@ -29,10 +29,9 @@ const validationSchemaAsennuspaikanTyyppi = Yup.object({
   selite: Yup.mixed<string>().oneOf(Object.values(SeliteTypeEnum)).required(),
   lisatiedot: Yup.string().when(["selite"], {
     is: (selite: string) => selite === SeliteTypeEnum.muu,
-    then: Yup.string().required(
-      'Lisätiedot vaaditaan, kun sijoituspaikka on "muu"'
-    ),
-    otherwise: Yup.string().nullable(),
+    then: (schema) =>
+      schema.required('Lisätiedot vaaditaan, kun sijoituspaikka on "muu"'),
+    otherwise: (schema) => schema.nullable(),
   }),
 });
 
@@ -71,19 +70,21 @@ const validationSchema = Yup.object().shape(
       .trim()
       .when("pdf_raportin_linkki", {
         is: (val: any) => !!val,
-        then: Yup.string(),
-        otherwise: Yup.string().required(
-          "Joko asianhallintatunnus tai pdf-raportin linkki vaaditaan"
-        ),
+        then: (schema) => schema,
+        otherwise: (schema) =>
+          schema.required(
+            "Joko asianhallintatunnus tai pdf-raportin linkki vaaditaan"
+          ),
       }),
     pdf_raportin_linkki: Yup.string()
       .trim()
       .when("mittaus_asianhallinta_id", {
         is: (val: any) => !!val,
-        then: Yup.string(),
-        otherwise: Yup.string().required(
-          "Joko asianhallintatunnus tai pdf-raportin linkki vaaditaan"
-        ),
+        then: (schema) => schema,
+        otherwise: (schema) =>
+          schema.required(
+            "Joko asianhallintatunnus tai pdf-raportin linkki vaaditaan"
+          ),
       }),
     rakennuksen_pinta_ala: Yup.number()
       .typeError("Pinta-alan tulee olla numero")

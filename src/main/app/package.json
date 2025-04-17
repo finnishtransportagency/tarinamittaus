@@ -7,7 +7,7 @@
     "@testing-library/react": "^15.0.6",
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
+    "@types/node": "^20.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "axios": "^0.21.1",
@@ -24,7 +24,7 @@
     "url-join": "^2.0.2",
     "uuid": "^8.3.2",
     "web-vitals": "^1.0.1",
-    "yup": "^0.32.9"
+    "yup": "^1.6.1"
   },
   "scripts": {
     "start": "webpack serve --config webpack.development.ts --mode development --open --hot",
