@@ -25,7 +25,7 @@
 
 # Set base image
 # See available options on https://hub.docker.com/_/node
-FROM node:14.7-alpine AS builder
+FROM node:20-alpine AS builder
 
 
 # Set arguments which can be later overwritten higher in hierarchy with ex. Docker Compose, or .gitlab-ci.yml
