@@ -27,7 +27,7 @@ export const CustomText = ({
           id={name}
           placeholder=""
           type="text"
-          readOnly={readOnly}
+          disabled={readOnly}
         />
         {meta.touched && meta.error && (
           <small className="react-form-message react-form-message-error">
