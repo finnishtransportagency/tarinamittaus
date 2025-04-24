@@ -16,7 +16,7 @@ export const StackedNumber = ({
   const [field, meta] = useField(name);
 
   return (
-    <Col className={meta.error && "has-error"}>
+    <Col className="mb-3">
       <Form.Label htmlFor={name}>{label}</Form.Label>
       <Form.Control
         {...field}
@@ -24,6 +24,7 @@ export const StackedNumber = ({
         placeholder=""
         type="number"
         readOnly={readOnly}
+        isInvalid={!!meta.error}
       />
       {meta.touched && meta.error && (
         <small className="react-form-message react-form-message-error">

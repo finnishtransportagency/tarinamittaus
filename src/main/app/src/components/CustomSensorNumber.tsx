@@ -16,9 +16,15 @@ export const CustomSensorNumber = ({
   const [field, meta] = useField(name);
 
   return (
-    <Col sm="4" className={meta.error && "has-error"}>
+    <Col sm="4" className="mb-3">
       <Form.Label htmlFor={name}>{label}</Form.Label>
-      <Form.Control {...field} id={name} type="number" readOnly={readOnly} />
+      <Form.Control
+        {...field}
+        id={name}
+        type="number"
+        readOnly={readOnly}
+        isInvalid={!!meta.error}
+      />
       {meta.touched && meta.error && (
         <small className="react-form-message react-form-message-error">
           {meta.error}

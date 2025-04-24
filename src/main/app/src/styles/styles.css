@@ -1,52 +1,49 @@
-
 .sidebar-arrow {
-    margin-left: 1em;
+  margin-left: 1em;
 }
 .nav-pills li {
-    float: 'none';
+  float: "none";
 }
 
 li.nav-item {
-    max-width: 15em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    background: white;
+  max-width: 15em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  background: white;
 }
 
 li.nav-item a {
-    color: darkcyan;
-    font-size: 16px;
-
+  color: darkcyan;
+  font-size: 16px;
 }
 
 li.nav-item a:active {
-    background: darkcyan;
-    color: white;
+  background: darkcyan;
+  color: white;
 }
 
 li.nav-item a:hover {
-    background-color: lightgrey;
-
+  background-color: lightgrey;
 }
 
 .nav-level-2 {
-    margin-left: 1em;
+  margin-left: 1em;
 }
 .nav-level-3 {
-    margin-left: 2em;
+  margin-left: 2em;
 }
 
 #button_container {
-    background-color: #a9a9a9;
-    position: sticky;
-    bottom: 0px;
-    border-radius: 4px;
+  background-color: #a9a9a9;
+  position: sticky;
+  bottom: 0px;
+  border-radius: 4px;
 }
 
 #button_container button {
-    margin: 6px 0px 6px 6px;
+  margin: 6px 0px 6px 6px;
 }
 
-.has-error .form-control {
-    background-color: rgba(169, 68, 66, 0.1);
+.is-invalid.form-control {
+  background-color: rgba(169, 68, 66, 0.1);
 }

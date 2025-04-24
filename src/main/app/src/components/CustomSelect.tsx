@@ -23,7 +23,7 @@ export const CustomSelect = ({
   }));
 
   return (
-    <Col className={meta.error && "has-error"}>
+    <Col className="mb-3">
       <Form.Label htmlFor="select">{label}</Form.Label>
       <Select
         options={options}
