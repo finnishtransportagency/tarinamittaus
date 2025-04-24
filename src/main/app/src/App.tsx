@@ -10,9 +10,9 @@ import routes from "./App.routes";
 function App() {
   return (
     <HashRouter>
-      <Container fluid>
+      <Container fluid className="ml-3">
         <Row>
-          <Col sm={2}>
+          <Col sm={2} className="mt-3">
             <h2>Tärinämittaus</h2>
             <ul className="nav nav-pills">
               <li className="nav-item" key={"mittauslista"}>
@@ -22,7 +22,7 @@ function App() {
               </li>
             </ul>
           </Col>
-          <Col sm={9} style={{ top: "50px" }}>
+          <Col sm={9} style={{ position: "relative", top: "50px" }}>
             <Switch>
               {routes.map((route, i) => (
                 <Route key={i} {...route} />
