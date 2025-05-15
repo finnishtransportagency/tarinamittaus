@@ -135,15 +135,15 @@ const MittausForm = () => {
   const { id } = useParams<{ id: string }>();
 
   React.useEffect(() => {
-    const fetchAndSetData = async () => {
-      const data = await getData(id); // TODO
+    const fetchAndSetData = async (id: string) => {
+      const data = await getData(id);
       if (!data) {
         setFetchedValues(null);
         return;
       }
       setFetchedValues(initializeEmptyFields(data));
     };
-    id && fetchAndSetData();
+    id && fetchAndSetData(id);
   }, [id]);
 
   const navigate = useNavigate();
