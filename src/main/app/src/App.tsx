@@ -9,7 +9,12 @@ import routes from "./App.routes";
 
 function App() {
   return (
-    <HashRouter>
+    <HashRouter
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      }}
+    >
       <Container fluid className="ml-3">
         <Row>
           <Col sm={2} className="mt-3">
