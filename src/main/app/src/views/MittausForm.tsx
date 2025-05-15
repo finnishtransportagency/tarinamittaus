@@ -9,7 +9,7 @@ import AsennettuAnturi from "../entities/AsennettuAnturi";
 import { Button } from "react-bootstrap";
 import SeliteTypeEnum from "../types/enums/seliteType.enum";
 import MittausSuuntaTypeEnum from "../types/enums/mittausSuuntaType.enum";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router";
 import IMittaus from "../types/interfaces/mittaus.interface";
 import { getData, deleteData, putData, postData } from "../api";
 

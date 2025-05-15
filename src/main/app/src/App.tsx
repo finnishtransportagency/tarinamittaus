@@ -2,19 +2,14 @@ import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import { Route, Link, HashRouter, Routes } from "react-router-dom";
+import { Route, Link, HashRouter, Routes } from "react-router";
 
 import urljoin from "url-join";
 import routes from "./App.routes";
 
 function App() {
   return (
-    <HashRouter
-      future={{
-        v7_startTransition: true,
-        v7_relativeSplatPath: true,
-      }}
-    >
+    <HashRouter>
       <Container fluid className="ml-3">
         <Row>
           <Col sm={2} className="mt-3">

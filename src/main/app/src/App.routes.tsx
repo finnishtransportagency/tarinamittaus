@@ -1,5 +1,5 @@
 import React from "react";
-import { RouteProps } from "react-router-dom";
+import { RouteProps } from "react-router";
 import MittausListView from "./views/MittausListView";
 import MittausView from "./views/MittausView";
 
