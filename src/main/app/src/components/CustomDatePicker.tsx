@@ -38,7 +38,7 @@ export const FormikCustomDatePicker = ({
   );
 
   return (
-    <Form.Group as={Row} className={meta.error && "has-error"}>
+    <Form.Group as={Row} className="mb-3">
       <Form.Label column sm="4" htmlFor={name}>
         {label}
       </Form.Label>
@@ -47,7 +47,7 @@ export const FormikCustomDatePicker = ({
           <DatePicker
             locale={fi}
             dateFormat={dateFormat}
-            className="tk-field form-control"
+            className={`tk-field form-control ${meta.error && "is-invalid"}`}
             disabled={readOnly}
             selected={
               field.value ? parse(field.value, dateFormat, new Date()) : null
