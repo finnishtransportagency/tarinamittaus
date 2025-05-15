@@ -3,6 +3,8 @@
 Start application and db instances locally with docker-compose `docker-compose up --build`
 
 Alternatively, `docker-compose up --build tarina` or `docker-compose up --build db` starts corresponding service from compose file.
+If these commands result in an error it might be caused by an existinng tarinamittaus db container. In that case, use `docker ps -a`
+to check the tarinamittaus db container name and remove the container with `docker rm -f <name_of_container>` and try again.
 
 Without docker `mvn clean install -Dmaven.test.skip=true` and `mvn spring-boot:run`
 
