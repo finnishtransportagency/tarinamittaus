@@ -2,7 +2,7 @@ import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import { Switch, Route, Link, HashRouter } from "react-router-dom";
+import { Route, Link, HashRouter, Routes } from "react-router";
 
 import urljoin from "url-join";
 import routes from "./App.routes";
@@ -16,18 +16,18 @@ function App() {
             <h2>Tärinämittaus</h2>
             <ul className="nav nav-pills">
               <li className="nav-item" key={"mittauslista"}>
-                <Link to={urljoin("/mittauslista")} className="nav-link">
+                <Link to="/mittauslista" className="nav-link">
                   Mittauslista
                 </Link>
               </li>
             </ul>
           </Col>
           <Col sm={9} style={{ position: "relative", top: "50px" }}>
-            <Switch>
+            <Routes>
               {routes.map((route, i) => (
                 <Route key={i} {...route} />
               ))}
-            </Switch>
+            </Routes>
           </Col>
         </Row>
       </Container>

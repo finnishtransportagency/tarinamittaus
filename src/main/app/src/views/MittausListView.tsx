@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import { Button, FormControl } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import Pagination from "react-bootstrap/Pagination";
 
 import IMittaus from "../types/interfaces/mittaus.interface";

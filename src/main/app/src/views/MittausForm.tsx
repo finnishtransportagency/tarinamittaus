@@ -9,7 +9,7 @@ import AsennettuAnturi from "../entities/AsennettuAnturi";
 import { Button } from "react-bootstrap";
 import SeliteTypeEnum from "../types/enums/seliteType.enum";
 import MittausSuuntaTypeEnum from "../types/enums/mittausSuuntaType.enum";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router";
 import IMittaus from "../types/interfaces/mittaus.interface";
 import { getData, deleteData, putData, postData } from "../api";
 
@@ -135,7 +135,7 @@ const MittausForm = () => {
   const { id } = useParams<{ id: string }>();
 
   React.useEffect(() => {
-    const fetchAndSetData = async () => {
+    const fetchAndSetData = async (id: string) => {
       const data = await getData(id);
       if (!data) {
         setFetchedValues(null);
@@ -143,22 +143,22 @@ const MittausForm = () => {
       }
       setFetchedValues(initializeEmptyFields(data));
     };
-    id && fetchAndSetData();
+    id && fetchAndSetData(id);
   }, [id]);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onClickDelete = (id: string) => {
     // TODO: replace with material ui modal
     // eslint-disable-next-line no-restricted-globals
     if (!confirm("Haluatko varmasti poistaa mittauksen?")) return;
     deleteData(id);
-    history.push("/mittauslista");
+    navigate("/mittauslista");
   };
 
   const onClickUpdate = async (values: any) => {
     await putData(values);
-    history.go(0);
+    navigate(0);
   };
 
   if (id && !fetchedValues) return <div>ei mittausta</div>;
@@ -190,9 +190,9 @@ const MittausForm = () => {
         validateOnMount
         onSubmit={(values, { setSubmitting }) => {
           postData({ ...values })
-            .then((res) => {
+            .then(() => {
               setSubmitting(false);
-              history.push("/mittauslista");
+              navigate("/mittauslista");
             })
             .catch((err) => {
               console.log(err);
