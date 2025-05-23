@@ -9,6 +9,7 @@ to check the tarinamittaus db container name and remove the container with `dock
 Without docker `mvn clean install -Dmaven.test.skip=true` and `mvn spring-boot:run`
 
 ### Profiles
+
 Application uses 3 profiles: local, docker and awsdev defined in pom.xml, with corresponding properties files in resources-folder.
 
 - local: active default
@@ -16,10 +17,43 @@ Application uses 3 profiles: local, docker and awsdev defined in pom.xml, with c
 - awsdev: value is passed from EnvironmentVariables in CodeBuild
 
 ## Swagger
+
 `http://localhost:8080/swagger-ui.html`
 
 ## Mapstruct
+
 `https://mapstruct.org/`
 
 ## Spring data specification
+
 `https://attacomsian.com/blog/spring-data-jpa-specifications`
+
+## Project structure
+
+- buildspec.yml: build definition for AWS environment
+- db: sql scripts for setting up the database
+- docker-compose.yaml: used to start up the whole project locally
+- Dockerfile, Dockerfile.aws Dockerfile_postgres: container definitions for local app, aws deployed app and local database
+- src/main: frontend in `app` and backend in `java`
+- src/main/resources: backend configuration
+
+### Backend
+
+- auth: JWT related code. User rights are unnecessary but copied over from tietokatalogi project
+- Controller: rest endpoints
+- Model: model objects (=database format) and data transfer objects (DTOs) (=api format)
+- Service: business logic, calls to lower level operations
+- Specification: Settings for search operations
+- Util: dto <-> model mappings using mapstruct
+- validator: Some validation code for calls, status unclear
+
+### Frontend
+
+- config/paths.js: copied over from tietokatalogi. Probably not needed, but originally there were problems with urls in deployment and this was one way to solve the problem
+- public: static files
+- src/api: rest api requests
+- src/components: UI elements for form
+- src/views: form views
+- webpack.development.ts, webpack.production.ts: webpack configurations
+
+Many (most?) configurations come from originally using create-react-app.
