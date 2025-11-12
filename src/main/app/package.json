@@ -53,7 +53,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
-    "@types/compression-webpack-plugin": "^6.0.5",
+    "@types/compression-webpack-plugin": "^9.0.0",
     "@types/dotenv-webpack": "^7.0.2",
     "@types/jest": "^26.0.15",
     "@types/mini-css-extract-plugin": "^1.4.3",
