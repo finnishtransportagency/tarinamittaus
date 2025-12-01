@@ -3,15 +3,25 @@ FROM 894932018761.dkr.ecr.eu-west-1.amazonaws.com/node:20-alpine as BUILD_FRONTE
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+# copy lock and package first for better layer caching
+COPY ./src/main/app/package*.json ./
+
+# install all deps for the build (devDeps needed to build) and then build
+RUN npm ci
+
+# copy source and build
 COPY ./src/main/app .
-RUN npm ci --omit=dev
 RUN npm run build
+
+# remove node_modules and lockfile so devDependencies are not left in this stage's filesystem
+RUN rm -rf node_modules package-lock.json
 
 FROM 894932018761.dkr.ecr.eu-west-1.amazonaws.com/maven:3.9-amazoncorretto-17 AS BUILD_BACKEND
 
 COPY ./src/main/java /data/src/main/java
 COPY ./src/main/resources /data/src/main/resources
 COPY pom.xml /data/
+# copy only the frontend build output (no node_modules)
 COPY --from=BUILD_FRONTEND /usr/src/app/dist/ /data/src/main/resources/static/
 
 RUN cd /data && mvn clean package -Dmaven.test.skip=true
