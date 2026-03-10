@@ -1,4 +1,4 @@
-FROM 894932018761.dkr.ecr.eu-west-1.amazonaws.com/node:20-alpine as BUILD_FRONTEND
+FROM public.ecr.aws/docker/library/node:20-alpine3.23 as BUILD_FRONTEND
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -16,7 +16,7 @@ RUN npm run build
 # remove node_modules and lockfile so devDependencies are not left in this stage's filesystem
 RUN rm -rf node_modules package-lock.json
 
-FROM 894932018761.dkr.ecr.eu-west-1.amazonaws.com/maven:3.9-amazoncorretto-17 AS BUILD_BACKEND
+FROM public.ecr.aws/docker/library/maven:3.9-amazoncorretto-17 AS BUILD_BACKEND
 
 COPY ./src/main/java /data/src/main/java
 COPY ./src/main/resources /data/src/main/resources
@@ -26,7 +26,7 @@ COPY --from=BUILD_FRONTEND /usr/src/app/dist/ /data/src/main/resources/static/
 
 RUN cd /data && mvn clean package -Dmaven.test.skip=true
 
-FROM 894932018761.dkr.ecr.eu-west-1.amazonaws.com/amazoncorretto:17-alpine
+FROM public.ecr.aws/docker/library/amazoncorretto:17-alpine3.23
 
 RUN apk --no-cache upgrade
 
