@@ -1,4 +1,4 @@
-FROM node:20-alpine as BUILD_FRONTEND
+FROM node:20-alpine3.23 as BUILD_FRONTEND
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -16,7 +16,7 @@ COPY --from=BUILD_FRONTEND /usr/src/app/dist/ /data/src/main/resources/static/
 
 RUN cd /data && mvn clean package -Dmaven.test.skip=true
 
-FROM amazoncorretto:17-alpine
+FROM amazoncorretto:17-alpine3.23
 
 RUN apk --no-cache upgrade
 RUN mkdir tarinamittaus
