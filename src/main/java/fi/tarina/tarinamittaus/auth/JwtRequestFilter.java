@@ -145,7 +145,7 @@ public class JwtRequestFilter {
 
                      // Tärinämittauksessa ei ole käytössä alla olevia rooleja vaan ne ovat kopioitu suoraan toisesta
                      // projektista placeholdereiksi, jos joskus halutaan ottaa roolit käyttöön. Kommentoitu pois.
-                    for (String role : roles) {
+                    /*for (String role : roles) {
                         switch (role) {
                             case "tk_tietoturva":
                                 userGroups.add(UserGroup.SUPER_USER);
@@ -155,7 +155,7 @@ public class JwtRequestFilter {
                     }
                     if (userGroups.isEmpty()) {
                         logger.warn("JWT tokenissa ei ollut yhtaan tunnettua roolia");
-                    }
+                    }*/
                 }
             } else {
                 logger.debug("No JWT header found");
