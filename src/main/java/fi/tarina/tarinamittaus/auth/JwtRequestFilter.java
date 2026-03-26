@@ -123,18 +123,18 @@ public class JwtRequestFilter {
                             String[] parsed = mapper.readValue(roolitStr, String[].class);
                             if (parsed != null && parsed.length > 0) {
                                 roles = parsed;
-                                logger.info(String.format("EntraId roolien parsinta onnistui, roolit ovat: %s", StringUtils.join(roles, ",")));
+                                //logger.info(String.format("EntraId roolien parsinta onnistui, roolit ovat: %s", StringUtils.join(roles, ",")));
                             }
                             // Jos EntraId roolien parsinta ei onnistu, käytetään vanhaa tapaa. Vanhan tavan voi poistaa
                             // kun EntraId otettu käyttöön testi- ja tuotantosovelluksessa ja roolien parsinta niissä toimii.
                             else {
                                 roles = roolitStr.split(",");
-                                logger.info(String.format("EntraId roolien parsinta palautti tyhjan taulukon, fallback roolit: %s", StringUtils.join(roles, ",")));
+                                //logger.info(String.format("EntraId roolien parsinta palautti tyhjan taulukon, fallback roolit: %s", StringUtils.join(roles, ",")));
                             }
                         } catch (Exception e) {
                             // Fallback to old comma-separated format
                             roles = roolitStr.split(",");
-                            logger.info(String.format("EntraId roolien parsinta epäonnistui, käytetty vanhaa tapaa, roolit ovat: %s", StringUtils.join(roles, ",")));
+                            //logger.info(String.format("EntraId roolien parsinta epäonnistui, käytetty vanhaa tapaa, roolit ovat: %s", StringUtils.join(roles, ",")));
                         }
                     } else {
                         logger.debug("JWT claim 'custom:rooli' not present");
