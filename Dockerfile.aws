@@ -28,7 +28,13 @@ RUN cd /data && mvn clean package -Dmaven.test.skip=true
 
 FROM public.ecr.aws/docker/library/amazoncorretto:17-alpine3.23
 
-RUN apk --no-cache upgrade
+RUN apk update && \
+	apk upgrade --no-cache && \
+	# Ensure CA certificates and timezone data are present and up-to-date
+	apk add --no-cache ca-certificates tzdata && \
+	update-ca-certificates || true && \
+	# Clean apk cache
+	rm -rf /var/cache/apk/*
 
 ARG ENVIRONMENT_VALUE
 ARG AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
