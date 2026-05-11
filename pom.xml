@@ -5,8 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<!-- TODO update -->
-        <version>3.5.7</version>
+        <version>3.5.14</version>
         <relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>fi.tarina</groupId>
@@ -40,6 +39,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
+			<version>42.7.11</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
