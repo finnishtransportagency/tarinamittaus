@@ -34,7 +34,6 @@ public class MittausController {
             MittausSearchParameters parameters
                              ) {
         logger.info("Get all mittaus");
-        logger.info("Test log. Remove after verifying the production pipeline works.");
         try {
             return mittausService.searchMittausListByKeyword(parameters);
         } catch (Exception e) {
