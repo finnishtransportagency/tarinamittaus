@@ -81,3 +81,12 @@ Sovellusta ajetaan kontitettuna AWS:n ECS:ssä Väyläpilvi-ympäristössä.
 ## Julkaisu
 
 Julkaisu testi- ja tuotantoympäristöihin tapahtuu puskemalla koodia dev- ja main-haaroihin, vastaavasti.
+
+## Tuotantoon asennus
+
+Ajetaan alla olevat Git komennot:
+
+git checkout main
+git fetch
+git merge --ff-only origin/dev
+git push origin main
