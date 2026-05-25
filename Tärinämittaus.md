@@ -82,6 +82,8 @@ Sovellusta ajetaan kontitettuna AWS:n ECS:ssä Väyläpilvi-ympäristössä.
 
 Julkaisu testi- ja tuotantoympäristöihin tapahtuu puskemalla koodia dev- ja main-haaroihin, vastaavasti.
 
+Testiin asennuksen voi tarkastella AWS tilin CodePipeline näkymästä, mutta tuotanto pitää tarkastaa TkAdminCentralizedServices tilin logeista, koska ei ole oikeuksia pipelineen.
+
 ## Tuotantoon asennus
 
 Ajetaan alla olevat Git komennot:
