@@ -74,6 +74,20 @@ Uudet työbranchit luodaan devin perusteella.
 - typescript 4.1.2
 - webpack 5.37.0
 
+### Riippuvuuksien hallinta
+
+pom.xml sisältää dependencyManagement-osion, jonka alle on kerätty transitiivisten riippuvuuksien versioiden overideja,
+koska niitä käyttävä(t) kirjasto(t) eivät vielä käytä transitiivisen riippuvuuden versiota, missä olisi korjattu
+haavoittuvuus.
+
+Esimerkkinä AWS:n haavoittuvuusraportissa olevasta riippuvuudesta com.fasterxml.jackson.core:jackson-databind, joka
+sisältää haavoittuvuuden mutta ei ole projektin suora riippuvuus. Aja alla oleva komento terminaalissa projektin
+juuressa nähdäksesi, minkä paketin kautta transitiivinen riippuvuus tulee projektiin. Tämän jälkeen voidaan päivittää
+riippuvuuden versio pom.xml:ään tai overridettää transitiivisen riippuvuuden versio, jos sitä käyttävä paketti
+ei käytä vielä korjattua versiota.
+
+`mvn -f pom.xml dependency:tree -Dincludes=com.fasterxml.jackson.core:jackson-databind -Dverbose -DoutputType=text`
+
 ### Palvelin
 
 Sovellusta ajetaan kontitettuna AWS:n ECS:ssä Väyläpilvi-ympäristössä.
