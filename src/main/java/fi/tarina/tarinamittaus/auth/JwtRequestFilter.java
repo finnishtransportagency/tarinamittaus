@@ -51,8 +51,8 @@ public class JwtRequestFilter {
                     response.append(line);
                 }
                 key = response.toString()
-                        .replaceAll("-----BEGIN PUBLIC KEY-----", "")
-                        .replaceAll("-----END PUBLIC KEY-----", "");
+                        .replace("-----BEGIN PUBLIC KEY-----", "")
+                        .replace("-----END PUBLIC KEY-----", "");
 
                 logger.debug(String.format("Public key %s", key));
             }
@@ -72,8 +72,8 @@ public class JwtRequestFilter {
             logger.debug("generated ecPublicKey: " + ecPublicKey);
         }
         logger.debug("using ecPublicKey: " + ecPublicKey);
-        JwtParser parser = Jwts.parserBuilder().setSigningKey(ecPublicKey).build();
-        return parser.parseClaimsJws(jwt).getBody();
+        JwtParser parser = Jwts.parser().verifyWith(ecPublicKey).build();
+        return parser.parseSignedClaims(jwt).getPayload();
     }
 
     public UserInfo getUserInfo(HttpServletRequest request) {
