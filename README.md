@@ -2,6 +2,12 @@
 
 ## First time setup
 
+Frontend builds use Node.js 22.23.4 or a newer 22.x release. Version 22.23.4
+contains the [21 October 2026 security fixes](https://nodejs.org/en/blog/vulnerability/october-2026-security-releases).
+For local development, run `nvm install` and `nvm use` from the repository root,
+then run `npm ci` in `src/main/app`. The Docker build stages pin the patched
+Node.js version; rebuild the images to apply the update.
+
 Preferably start the constainers individually, first the database container
 
 - `docker-compose up --build db`
