@@ -1,4 +1,4 @@
-FROM node:22-alpine3.24 as BUILD_FRONTEND
+FROM node:22.23.4-alpine3.24 as BUILD_FRONTEND
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
