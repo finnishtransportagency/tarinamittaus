@@ -59,12 +59,12 @@ Uudet työbranchit luodaan devin perusteella.
 ### Backend
 
 - Java-versio 17
-- Java Spring Boot 3.3.0
-- Java Spring 6.1.8
-- JPA 3.1.0
-- Hibernate 6.5.2
-- Hibernate Validator 8.0.1.Final
-- tomcat-embed-core 10.1.24
+- Java Spring Boot 4.1.1
+- Java Spring 7.0.9
+- JPA 3.2.0
+- Hibernate 7.4.5.Final
+- Hibernate Validator 9.1.3.Final
+- tomcat-embed-core 11.0.25
 
 ### Frontend
 
