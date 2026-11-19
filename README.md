@@ -51,3 +51,4 @@ Application uses 3 profiles: local, docker and awsdev defined in pom.xml, with c
 
 ## Spring data specification
 `https://attacomsian.com/blog/spring-data-jpa-specifications`
+
